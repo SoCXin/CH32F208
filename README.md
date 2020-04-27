@@ -11,9 +11,6 @@
 
 ### [资源收录](https://github.com/SoCXin/LogicGreen)
 
-* [参考文档](docs/)
-
-* [LGT8F328P](https://github.com/SoCXin/LGT8F328P)
-
+* [arduino资源](https://github.com/SoCXin/LogicGreen)
 
 ###  [SoC芯平台](http://SoC.Xin) 

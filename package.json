@@ -1,0 +1,7 @@
+{
+    "name": "framework-N44",
+    "description": "Arduino Base LGT8F328P Core",
+    "system": "*",
+    "url": "https://github.com/OS-Q/N44",
+    "version": "3.6.0"
+}
