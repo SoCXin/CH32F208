@@ -1,32 +1,39 @@
-﻿# [LGT8P663](https://github.com/SoCXin/LGT8P663)
+﻿# [CH32F208](https://github.com/SoCXin/CH32F208)
 
 [![sites](http://182.61.61.133/link/resources/SoC.png)](http://www.SoC.Xin)
 
-#### [Vendor](https://github.com/SoCXin/Vendor)：[LogicGreen](http://www.lgtic.com/)
-#### [Core](https://github.com/SoCXin/RISC)：[RISC](https://github.com/SoCXin/RISC)
-#### [Level](https://github.com/SoCXin/Level)：16MHz
+* [WCH](http://www.wch.cn/)：[Cortex-M3](https://github.com/SoCXin/Cortex-M3)
+* [L4R4](https://github.com/SoCXin/Level)：144 MHz
 
-[LGT8P663](http://www.lgtic.com/lgt8p663a/) 是基于OTP工艺面向超低成本的小型消费类电子产品市场. LGT8P663A内部程序空间为1K指令字空间, 64字节的数据SRAM. 模拟外设包括一个高速高精度的模拟比较器, 一个0.58V内部参考电压以及一个5位的DAC, 可用于简单的外部电压检测和监控; 数字外设部分包括一个10位定时器和一个16位定时器, 一个增强的俘获PWM发生器, 可实现带死区以及自动关闭的半桥PWM驱动, 一个支持主从模式的I2C控制器, 看门狗定时器等.
+## [简介](https://github.com/SoCXin/CH32F208/wiki)
 
+[CH32F208](https://github.com/SoCXin/CH32F208) 系列是基于Cortex-M3内核设计的无线型微控制器，此系列主频高达144MHz。片上集成2Mbps低功耗蓝牙BLE 通讯模块、10M以太网MAC+PHY模块、USB2.0全速设备+主机/设备接口、CAN控制器等。
 
-[![sites](docs/LGT8P663.png)](http://www.yspringtech.com/upload/down/LGT8P663%20V1.2.pdf)
+[![sites](docs/CH32F208.png)](http://www.wch.cn/products/CH32F208.html)
 
 #### 关键特性
 
-* 内置EEPROM控制器, 可以直接外接I2C接口E2PROM
-* 0.58V内部参考
-* 1x 高速高精度模拟比较器
-* 1x 5位数模转换器(DAC)
+* 10M以太网控制器（MAC+PHY）
+* 4个USART接口
+* USB2.0全速主机/设备
+* 低功耗蓝牙5.1
+* 1个CAN接口（2.0B主动）
+* 64KB SRAM，128KB Flash
 
-### [资源收录](https://github.com/SoCXin/LGT8P663)
 
-* [参考文档](docs/)
+### [资源收录](https://github.com/SoCXin)
+
 * [参考资源](src/)
+* [参考文档](docs/)
 * [参考工程](project/)
 
 ### [选型建议](https://github.com/SoCXin)
 
-[LGT8P663](https://github.com/SoCXin/LGT8P663) 是少有的量产低成本MCU
+[CH32F208](https://github.com/SoCXin/CH32F208)
 
+* LQFP64M
+* QFN68
+* QFN48
+* QFN28 (4*4mm)
 
-###  [www.SoC.xin(芯)](http://www.SoC.Xin)
+### [探索芯世界 www.SoC.xin](http://www.SoC.Xin)
