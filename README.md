@@ -36,4 +36,7 @@
 * QFN48
 * QFN28 (4*4mm)
 
+[![sites](docs/diff.png)](http://www.wch.cn/products/CH32F208.html)
+[![sites](docs/list.png)](http://www.wch.cn/products/CH32F208.html)
+
 ### [探索芯世界 www.SoC.xin](http://www.SoC.Xin)
