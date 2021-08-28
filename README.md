@@ -18,18 +18,20 @@
 * USB2.0全速主机/设备
 * 低功耗蓝牙5.1
 * 1个CAN接口（2.0B主动）
-* 64KB SRAM，128KB Flash
 
+
+[![sites](docs/CH32F20X.png)](http://www.wch.cn/products/CH32F208.html)
 
 ### [资源收录](https://github.com/SoCXin)
 
 * [参考资源](src/)
 * [参考文档](docs/)
 * [参考工程](project/)
+* [入门文档](https://docs.soc.xin/CH32F208)
 
 ### [选型建议](https://github.com/SoCXin)
 
-[CH32F208](https://github.com/SoCXin/CH32F208)
+[![sites](docs/CH32F20.png)](http://www.wch.cn/products/CH32F208.html)
 
 * LQFP64M
 * QFN68

@@ -2,14 +2,14 @@
     "type":"MCU",
     "name":"CH32F208",
     "title": "WCH Cortex-M3 CH32F208 MCU",
-    "description":"WCH Cortex-M3 CH32F208 MCU",
+    "description":"WCH Cortex-M3 MCU",
     "version":"1.0.0",
     "Core": {
         "num": 1,
         "type":"Cortex-M3",
         "Freq": 144,
-        "DMIPS": 100,
-        "CoreMark": 160
+        "DMIPS": 216,
+        "CoreMark": 500
     },
     "manufacturer": {
         "vendor":"WCH",
@@ -73,8 +73,7 @@
         "dev-platform",
         "ARM",
         "Cortex-M",
-        "Raspberry Pi",
-        "RP2040",
+        "WCH",
         "DAC","SDIO","CAN","I2C","RTC","SPI",
         "3.6V","1.8V"
     ]
