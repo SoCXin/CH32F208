@@ -31,8 +31,6 @@
 
 ### [选型建议](https://github.com/SoCXin)
 
-[![sites](docs/CH32F20.png)](http://www.wch.cn/products/CH32F208.html)
-
 * LQFP64M
 * QFN68
 * QFN48
