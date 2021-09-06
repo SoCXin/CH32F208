@@ -11,7 +11,7 @@
 
 [![sites](docs/CH32F208.png)](http://www.wch.cn/products/CH32F208.html)
 
-#### 关键特性
+### 关键特性
 
 * 10M以太网控制器（MAC+PHY）
 * 4个USART接口
@@ -31,10 +31,18 @@
 
 ### [选型建议](https://github.com/SoCXin)
 
+#### 封装规格
+
 * LQFP64M
 * QFN68
 * QFN48
 * QFN28 (4*4mm)
+
+#### 型号比较
+
+[CH32F207](https://github.com/SoCXin/CH32F207)相比[CH32F208](https://github.com/SoCXin/CH32F208)偏向于有线连接，除了无BLE外，配置更丰富，尤其是具备更高规格的以太网和USB-HS-PHY配置。
+
+[CH32F208](https://github.com/SoCXin/CH32F208)特别的一点是在于具有QFN28 (4*4mm)封装，十分便于紧凑设计。相似配置的产品，还可以参考[CH579](https://github.com/SoCXin/CH579)
 
 [![sites](docs/diff.png)](http://www.wch.cn/products/CH32F208.html)
 [![sites](docs/list.png)](http://www.wch.cn/products/CH32F208.html)
