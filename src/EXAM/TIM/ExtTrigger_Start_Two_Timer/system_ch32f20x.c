@@ -4,7 +4,10 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : CH32F20x Device Peripheral Access Layer System Source File.
-*                      For HSE = 8Mhz
+*                      For CH32F208 HSE = 32Mhz
+*                      For others   HSE = 8Mhz
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *********************************************************************************/
 #include "ch32f20x.h" 
 
@@ -21,6 +24,13 @@
 //#define SYSCLK_FREQ_96MHz  96000000
 //#define SYSCLK_FREQ_120MHz  120000000
 //#define SYSCLK_FREQ_144MHz  144000000
+
+
+/* Uncomment the following line if you need to relocate your vector Table in Internal SRAM */
+/* #define VECT_TAB_SRAM */
+
+/* Vector Table base offset field This value must be a multiple of 0x200 */
+#define VECT_TAB_OFFSET  0x0 
 
 /* Clock Definitions */
 #ifdef SYSCLK_FREQ_HSE
@@ -72,31 +82,51 @@ static void SetSysClock(void);
 #endif
 
 
-/******************************************************************************************
-* Function Name  : SystemInit
-* Description    : Setup the microcontroller system Initialize the Embedded Flash Interface, 
-*                  the PLL and update the SystemCoreClock variable.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SystemInit
+ *
+ * @brief   Setup the microcontroller system Initialize the Embedded Flash Interface,
+ *        the PLL and update the SystemCoreClock variable.
+ *
+ * @return  none
+ */
 void SystemInit (void)
 {
   RCC->CTLR |= (uint32_t)0x00000001;
+
+#ifdef CH32F20x_D8C
   RCC->CFGR0 &= (uint32_t)0xF8FF0000;
+#else
+  RCC->CFGR0 &= (uint32_t)0xF0FF0000;
+#endif
+
   RCC->CTLR &= (uint32_t)0xFEF6FFFF;
   RCC->CTLR &= (uint32_t)0xFFFBFFFF;
   RCC->CFGR0 &= (uint32_t)0xFF80FFFF;
-  RCC->INTR = 0x009F0000;    
+#ifdef CH32F20x_D8C
+  RCC->CTLR &= (uint32_t)0xEBFFFFFF;
+  RCC->INTR = 0x00FF0000;
+  RCC->CFGR2 = 0x00000000;
+#else
+  RCC->INTR = 0x009F0000;   
+#endif
+
   SetSysClock();
+
+#ifdef VECT_TAB_SRAM
+  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
+#else
+  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. */
+#endif 
 }
 
-
-/******************************************************************************************
-* Function Name  : SystemCoreClockUpdate
-* Description    : Update SystemCoreClock variable according to Clock Register Values.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SystemCoreClockUpdate
+ *
+ * @brief   Update SystemCoreClock variable according to Clock Register Values.
+ *
+ * @return  none
+ */
 void SystemCoreClockUpdate (void)
 {
   uint32_t tmp = 0, pllmull = 0, pllsource = 0, Pll_6_5 = 0;
@@ -116,18 +146,17 @@ void SystemCoreClockUpdate (void)
       pllsource = RCC->CFGR0 & RCC_PLLSRC; 
       pllmull = ( pllmull >> 18) + 2;
 	  
-      if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){ /* for other CH32F20x */
-          if(pllmull == 17) pllmull = 18;
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)	  
+      if(pllmull == 17) pllmull = 18;
+#else
+      if(pllmull == 2) pllmull = 18;
+      if(pllmull == 15){
+          pllmull = 13;  /* *6.5 */
+          Pll_6_5 = 1;
       }
-      else{  /* for CH32F207 */
-          if(pllmull == 2) pllmull = 18;
-          if(pllmull == 15){
-              pllmull = 13;  /* *6.5 */
-              Pll_6_5 = 1;
-          }
-          if(pllmull == 16) pllmull = 15;
-          if(pllmull == 17) pllmull = 16;
-      }
+      if(pllmull == 16) pllmull = 15;
+      if(pllmull == 17) pllmull = 16;
+#endif
 	  
       if (pllsource == 0x00)
       {
@@ -137,11 +166,19 @@ void SystemCoreClockUpdate (void)
       {    
         if ((RCC->CFGR0 & RCC_PLLXTPRE) != (uint32_t)RESET)
         {
+#ifdef CH32F20x_D8W
+          SystemCoreClock = ((HSE_VALUE>>2) >> 1) * pllmull;
+#else
           SystemCoreClock = (HSE_VALUE >> 1) * pllmull;
+#endif
         }
         else
         {
+#ifdef CH32F20x_D8W
+          SystemCoreClock = (HSE_VALUE>>2) * pllmull;
+#else
           SystemCoreClock = HSE_VALUE * pllmull;
+#endif   
         }
       }
 
@@ -158,12 +195,13 @@ void SystemCoreClockUpdate (void)
 }
 
 
-/******************************************************************************************
-* Function Name  : SetSysClock
-* Description    : Configures the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers. 
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClock
+ *
+ * @brief   Configures the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClock(void)
 {
 #ifdef SYSCLK_FREQ_HSE
@@ -195,12 +233,13 @@ static void SetSysClock(void)
 
 #ifdef SYSCLK_FREQ_HSE
 
-/******************************************************************************************
-* Function Name  : SetSysClockToHSE
-* Description    : Sets HSE as System clock source and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockToHSE
+ *
+ * @brief   Sets HSE as System clock source and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockToHSE(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -226,10 +265,7 @@ static void SetSysClockToHSE(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
-    /* Flash 0 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_0;
+
    
 		/* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;      
@@ -257,12 +293,13 @@ static void SetSysClockToHSE(void)
 
 #elif defined SYSCLK_FREQ_24MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo24
-* Description    : Sets System clock frequency to 24MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo24
+ *
+ * @brief   Sets System clock frequency to 24MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo24(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -286,12 +323,9 @@ static void SetSysClockTo24(void)
   }  
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 0 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_0;    
+
+   
 
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;   
@@ -302,12 +336,11 @@ static void SetSysClockTo24(void)
 
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE | RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL3);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL3_EXTEN);
-    }
+#endif
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;
 		
@@ -333,12 +366,13 @@ static void SetSysClockTo24(void)
 
 #elif defined SYSCLK_FREQ_48MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo48
-* Description    : Sets System clock frequency to 48MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo48
+ *
+ * @brief   Sets System clock frequency to 48MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo48(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -363,12 +397,9 @@ static void SetSysClockTo48(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 1 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_1;    
+
+   
  
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;    
@@ -380,12 +411,11 @@ static void SetSysClockTo48(void)
     /*  PLL configuration: PLLCLK = HSE * 6 = 48 MHz */
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE | RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL6);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL6_EXTEN);
-    }
+#endif
 
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;
@@ -412,12 +442,13 @@ static void SetSysClockTo48(void)
 
 #elif defined SYSCLK_FREQ_56MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo56
-* Description    : Sets System clock frequency to 56MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo56
+ *
+ * @brief   Sets System clock frequency to 56MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo56(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -442,12 +473,9 @@ static void SetSysClockTo56(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 2 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_2;    
+
+   
 		
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;   
@@ -459,12 +487,11 @@ static void SetSysClockTo56(void)
     /* PLL configuration: PLLCLK = HSE * 7 = 56 MHz */
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE | RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL7);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL7_EXTEN);
-    }
+#endif
 
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;
@@ -492,12 +519,13 @@ static void SetSysClockTo56(void)
 
 #elif defined SYSCLK_FREQ_72MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo72
-* Description    : Sets System clock frequency to 72MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo72
+ *
+ * @brief   Sets System clock frequency to 72MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo72(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -522,12 +550,9 @@ static void SetSysClockTo72(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 2 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_2;    
+
+   
 
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1; 
@@ -540,12 +565,11 @@ static void SetSysClockTo72(void)
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE |
                                         RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL9);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL9_EXTEN);
-    }
+#endif
 
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;
@@ -573,12 +597,13 @@ static void SetSysClockTo72(void)
 
 #elif defined SYSCLK_FREQ_96MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo96
-* Description    : Sets System clock frequency to 96MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo96
+ *
+ * @brief   Sets System clock frequency to 96MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo96(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -603,12 +628,9 @@ static void SetSysClockTo96(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 2 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_2;
+
+ 
 
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;
@@ -621,12 +643,11 @@ static void SetSysClockTo96(void)
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE |
                                         RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL12);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL12_EXTEN);
-    }
+#endif
 
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;
@@ -654,12 +675,13 @@ static void SetSysClockTo96(void)
 
 #elif defined SYSCLK_FREQ_120MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo120
-* Description    : Sets System clock frequency to 120MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo120
+ *
+ * @brief   Sets System clock frequency to 120MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo120(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -684,12 +706,9 @@ static void SetSysClockTo120(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 2 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_2;
+
+ 
 
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;
@@ -702,12 +721,11 @@ static void SetSysClockTo120(void)
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE |
                                         RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL15);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL15_EXTEN);
-    }
+#endif
 
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;
@@ -735,12 +753,13 @@ static void SetSysClockTo120(void)
 
 #elif defined SYSCLK_FREQ_144MHz
 
-/******************************************************************************************
-* Function Name  : SetSysClockTo144
-* Description    : Sets System clock frequency to 144MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
-* Input          : None
-* Return         : None
-*******************************************************************************************/
+/*********************************************************************
+ * @fn      SetSysClockTo144
+ *
+ * @brief   Sets System clock frequency to 144MHz and configure HCLK, PCLK2 and PCLK1 prescalers.
+ *
+ * @return  none
+ */
 static void SetSysClockTo144(void)
 {
   __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
@@ -765,12 +784,9 @@ static void SetSysClockTo144(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-    /* Enable Prefetch Buffer */
-    FLASH->ACTLR |= FLASH_ACTLR_PRFTBE;
 
-    /* Flash 2 wait state */
-    FLASH->ACTLR &= (uint32_t)((uint32_t)~FLASH_ACTLR_LATENCY);
-    FLASH->ACTLR |= (uint32_t)FLASH_ACTLR_LATENCY_2;
+
+ 
 
     /* HCLK = SYSCLK */
     RCC->CFGR0 |= (uint32_t)RCC_HPRE_DIV1;
@@ -783,12 +799,11 @@ static void SetSysClockTo144(void)
     RCC->CFGR0 &= (uint32_t)((uint32_t)~(RCC_PLLSRC | RCC_PLLXTPRE |
                                         RCC_PLLMULL));
 
-    if(((*(uint32_t*)0x1FFFF70C) & (1<<14)) != (1<<14)){
+#if defined (CH32F20x_D6) || defined (CH32F20x_D8) || defined (CH32F20x_D8W)
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL18);
-    }
-    else{
+#else
         RCC->CFGR0 |= (uint32_t)(RCC_PLLSRC_HSE | RCC_PLLXTPRE_HSE | RCC_PLLMULL18_EXTEN);
-    }
+#endif
 
     /* Enable PLL */
     RCC->CTLR |= RCC_PLLON;

@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for the 
 *                      I2C firmware library.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #ifndef __CH32F20x_I2C_H
 #define __CH32F20x_I2C_H
@@ -135,7 +137,7 @@ typedef struct
 #define  I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED           ((uint32_t)0x00030002)  /* BUSY, MSL and ADDR flags */
 #define  I2C_EVENT_MASTER_MODE_ADDRESS10                   ((uint32_t)0x00030008)  /* BUSY, MSL and ADD10 flags */
 #define  I2C_EVENT_MASTER_BYTE_RECEIVED                    ((uint32_t)0x00030040)  /* BUSY, MSL and RXNE flags */
-#define I2C_EVENT_MASTER_BYTE_TRANSMITTING                 ((uint32_t)0x00070080) /* TRA, BUSY, MSL, TXE flags */
+#define  I2C_EVENT_MASTER_BYTE_TRANSMITTING                ((uint32_t)0x00070080) /* TRA, BUSY, MSL, TXE flags */
 #define  I2C_EVENT_MASTER_BYTE_TRANSMITTED                 ((uint32_t)0x00070084)  /* TRA, BUSY, MSL, TXE and BTF flags */
 
 

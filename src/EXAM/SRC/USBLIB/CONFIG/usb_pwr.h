@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Connection/disconnection & power management header 
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #ifndef __USB_PWR_H
 #define __USB_PWR_H

@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Connection/disconnection & power management
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #include "usb_lib.h"
 #include "usb_conf.h"
@@ -23,12 +25,13 @@ ResumeS;
 
 __IO uint32_t remotewakeupon=0;
 
-/*******************************************************************************
-* Function Name  : PowerOn
-* Description    : Enable power on.
-* Input          : None.
-* Return         : USB_SUCCESS.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      PowerOn
+ *
+ * @brief   Enable power on.
+ *
+ * @return  USB_SUCCESS.
+ */
 RESULT PowerOn(void)
 {
   uint16_t wRegVal;
@@ -44,12 +47,13 @@ RESULT PowerOn(void)
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : PowerOff
-* Description    : handles switch-off conditions
-* Input          : None.
-* Return         : USB_SUCCESS.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      PowerOff
+ *
+ * @brief   handles switch-off conditions
+ *
+ * @return  USB_SUCCESS.
+ */
 RESULT PowerOff()
 {
   _SetCNTR(CNTR_FRES); 
@@ -59,12 +63,13 @@ RESULT PowerOff()
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : Suspend
-* Description    : sets suspend mode operating conditions
-* Input          : None.
-* Return         : USB_SUCCESS.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Suspend
+ *
+ * @brief   sets suspend mode operating conditions
+ *
+ * @return  USB_SUCCESS.
+ */
 void Suspend(void)
 {
 	uint32_t i =0;
@@ -100,12 +105,13 @@ void Suspend(void)
 	Enter_LowPowerMode();
 }
 
-/*******************************************************************************
-* Function Name  : Resume_Init
-* Description    : Handles wake-up restoring normal operations
-* Input          : None.
-* Return         : USB_SUCCESS.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Resume_Init
+ *
+ * @brief   Handles wake-up restoring normal operations
+ *
+ * @return  USB_SUCCESS.
+ */
 void Resume_Init(void)
 {
   uint16_t wCNTR;
@@ -117,17 +123,20 @@ void Resume_Init(void)
   _SetCNTR(IMR_MSK);
 }
 
-/*******************************************************************************
-* Function Name  : Resume
-* Description    : This is the state machine handling resume operations and
-*                 timing sequence. The control is based on the Resume structure
-*                 variables and on the ESOF interrupt calling this subroutine
-*                 without changing machine state.
-* Input          : a state machine value (RESUME_STATE)
-*                  RESUME_ESOF doesn't change ResumeS.eState allowing
-*                  decrementing of the ESOF counter in different states.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Resume
+ *
+ * @brief   This is the state machine handling resume operations and
+ *          timing sequence. The control is based on the Resume structure
+ *          variables and on the ESOF interrupt calling this subroutine
+ *          without changing machine state.
+ *
+ * @param   a state machine value (RESUME_STATE)
+ *         RESUME_ESOF doesn't change ResumeS.eState allowing
+ *         decrementing of the ESOF counter in different states.
+ *
+ * @return  none
+ */
 void Resume(RESUME_STATE eResumeSetVal)
 {
   uint16_t wCNTR;

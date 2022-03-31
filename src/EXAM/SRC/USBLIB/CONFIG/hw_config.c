@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : USB configuration file.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #include "usb_lib.h"
 #include "usb_prop.h"
@@ -15,58 +17,63 @@
 #include "stdarg.h"		 
 #include "stdio.h"	
 
-/*******************************************************************************
-* Function Name  : USBWakeUp_IRQHandler
-* Description    : This function handles USB wake up exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBWakeUp_IRQHandler
+ *
+ * @brief   This function handles USB wake up exception.
+ *
+ * @return  none
+ */
 void USBWakeUp_IRQHandler(void) 
 {
 	EXTI_ClearITPendingBit(EXTI_Line18);
 } 
 
-/*******************************************************************************
-* Function Name  : USBWakeUp_IRQHandler
-* Description    : This function handles USB exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBWakeUp_IRQHandler
+ *
+ * @brief   This function handles USB exception.
+ *
+ * @return  none
+ */
 void USB_LP_CAN1_RX0_IRQHandler(void) 
 {
 	USB_Istr();
 } 
 
-/*******************************************************************************
-* Function Name  : Set_USBConfig
-* Description    : Set_USBConfig .
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Set_USBConfig
+ *
+ * @brief   Set_USBConfig.
+ *
+ * @return  none
+ */
 void Set_USBConfig( )
 {
 	RCC_USBCLKConfig(RCC_USBCLKSource_PLLCLK_Div3);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB, ENABLE);	 		 
 }
 
-/*******************************************************************************
-* Function Name  : Enter_LowPowerMode
-* Description    : Enter low power mode.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Enter_LowPowerMode
+ *
+ * @brief   Enter low power mode.
+ *
+ * @return  none
+ */
 void Enter_LowPowerMode(void)
 {  
  	printf("usb enter low power mode\r\n");
 	bDeviceState=SUSPENDED;
 } 
 
-/*******************************************************************************
-* Function Name  : Leave_LowPowerMode
-* Description    : Leave low power mode.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Leave_LowPowerMode
+ *
+ * @brief   Leave low power mode.
+ *
+ * @return  none
+ */
 void Leave_LowPowerMode(void)
 {
 	DEVICE_INFO *pInfo=&Device_Info;
@@ -75,12 +82,13 @@ void Leave_LowPowerMode(void)
 	else bDeviceState = ATTACHED; 
 } 
 
-/*******************************************************************************
-* Function Name  : USB_Interrupts_Config
-* Description    : Configrate USB interrupt.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_Interrupts_Config
+ *
+ * @brief   Configrate USB interrupt.
+ *
+ * @return  none
+ */
 void USB_Interrupts_Config(void)
 { 
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -104,13 +112,16 @@ void USB_Interrupts_Config(void)
 	NVIC_Init(&NVIC_InitStructure);   
 }	
 
-/*******************************************************************************
-* Function Name  : USB_Port_Set
-* Description    : Set USB IO port.
-* Input          : NewState: DISABLE or ENABLE.
-*                  Pin_In_IPU: Enables or Disables intenal pull-up resistance.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_Port_Set
+ *
+ * @brief   Set USB IO port.
+ *
+ * @param   NewState - DISABLE or ENABLE.
+ *          Pin_In_IPU - Enables or Disables intenal pull-up resistance.
+ *
+ * @return  none
+ */
 void USB_Port_Set(FunctionalState NewState, FunctionalState Pin_In_IPU)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -119,7 +130,13 @@ void USB_Port_Set(FunctionalState NewState, FunctionalState Pin_In_IPU)
 		_SetCNTR(_GetCNTR()&(~(1<<1)));
 		GPIOA->CFGHR&=0XFFF00FFF;
 		GPIOA->OUTDR&=~(3<<11);	//PA11/12=0
+
+#ifdef CH32F20x_D8W	
+    GPIOA->CFGHR|=0X00044000; //float
+#else			
 		GPIOA->CFGHR|=0X00088000;	// IPD
+#endif	
+		
 	}
 	else
 	{	  

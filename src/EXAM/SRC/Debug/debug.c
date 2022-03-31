@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for UART
 *                      Printf , Delay functions.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #include "debug.h"
 
@@ -20,12 +22,13 @@ FILE __stdout;
 static u8  p_us=0;								   
 static u16 p_ms=0;					
 
-/*******************************************************************************
-* Function Name  : Delay_Init
-* Description    : Initializes Delay Funcation.
-* Input          : None
-* Return         : None
-*******************************************************************************/	
+/*********************************************************************
+ * @fn      Delay_Init
+ *
+ * @brief   Initializes Delay Funcation.
+ *
+ * @return  none
+ */
 void Delay_Init(void)
 {
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);	
@@ -33,13 +36,15 @@ void Delay_Init(void)
 	p_ms=(u16)p_us*1000;					   
 }								    
 
-/*******************************************************************************
-* Function Name  : Delay_Us
-* Description    : Microsecond Delay Time.
-* Input          : n£ºMicrosecond number.
-*                     n * p_us < 0xFFFFFF
-* Return         : None
-*******************************************************************************/		    								   
+/*********************************************************************
+ * @fn      Delay_Us
+ *
+ * @brief   Microsecond Delay Time.
+ *
+ * @param   n - Microsecond number.
+ *
+ * @return  None
+ */		    								   
 void Delay_Us(u32 n)
 {		
 	u32 i;	
@@ -57,13 +62,16 @@ void Delay_Us(u32 n)
 	SysTick->VAL =0X00;     	 
 }
 
-/*******************************************************************************
-* Function Name  : Delay_Ms
-* Description    : Millisecond Delay Time.
-* Input          : n£ºMillisecond number.
-*                     n * p_ms < 0xFFFFFF
-* Return         : None
-*******************************************************************************/	
+/*********************************************************************
+ * @fn      Delay_Ms
+ *
+ * @brief   Millisecond Delay Time.
+ *
+ * @param   n - Millisecond number.
+ *          n * p_ms < 0xFFFFFF
+ *
+ * @return  None
+ */	
 void Delay_Ms(u16 n)
 {	 		  	  
 	u32 i;	
@@ -81,12 +89,15 @@ void Delay_Ms(u16 n)
 	SysTick->VAL =0X00;        	    
 } 
 
-/*******************************************************************************
-* Function Name  : fputc
-* Description    : Support Printf Function 
-* Input          : data: UART send Data.
-* Return         : data: UART send Data.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      fputc
+ *
+ * @brief   Support Printf Function 
+ *
+ * @param   data - UART send Data.
+ *
+ * @return  data - UART send Data.
+ */
 int fputc(int data, FILE *f)
 {
 #if (DEBUG == DEBUG_UART1)
@@ -103,12 +114,15 @@ int fputc(int data, FILE *f)
   return data;
 }
 
-/*******************************************************************************
-* Function Name  : USART_Printf_Init
-* Description    : Initializes the USARTx peripheral.  
-* Input          : baudrate: USART communication baud rate.                                 
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USART_Printf_Init
+ *
+ * @brief   Initializes the USARTx peripheral.
+ *
+ * @param   baudrate - USART communication baud rate.
+ *
+ * @return  None
+ */
 void USART_Printf_Init(u32 baudrate)
 {
   GPIO_InitTypeDef GPIO_InitStructure;

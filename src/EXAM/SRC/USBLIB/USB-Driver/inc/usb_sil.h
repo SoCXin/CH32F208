@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for the  
 *                      USB Simplified Interface Layer firmware library.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #ifndef __USB_SIL_H
 #define __USB_SIL_H

@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Main program body.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 
 /*
@@ -27,12 +29,13 @@
 /* Global Variable */    
 
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {   
 	u8 usbstatus=0;	

@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for UART
 *                      Printf , Delay and Bit-Banding functions.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #ifndef __DEBUG_H
 #define __DEBUG_H 	

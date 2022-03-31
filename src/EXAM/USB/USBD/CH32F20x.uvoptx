@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>0</tvExp>
+        <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -100,7 +100,7 @@
         <tRSysVw>1</tRSysVw>
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
-        <nTsel>12</nTsel>
+        <nTsel>3</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -157,7 +157,6 @@
       </DebugFlag>
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
-      <bLintAuto>0</bLintAuto>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableLog>0</EnableLog>
@@ -169,7 +168,7 @@
 
   <Group>
     <GroupName>user</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -228,8 +227,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\SRC\Startup\startup_ch32f20x.s</PathWithFileName>
-      <FilenameWithoutPath>startup_ch32f20x.s</FilenameWithoutPath>
+      <PathWithFileName>..\..\SRC\Startup\startup_ch32f20x_D8.s</PathWithFileName>
+      <FilenameWithoutPath>startup_ch32f20x_D8.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -395,19 +394,6 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\SRC\StdPeriphDriver\src\ch32f20x_eth.c</PathWithFileName>
-      <FilenameWithoutPath>ch32f20x_eth.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>5</GroupNumber>
-      <FileNumber>16</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>0</Focus>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\..\SRC\StdPeriphDriver\src\ch32f20x_exti.c</PathWithFileName>
       <FilenameWithoutPath>ch32f20x_exti.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -415,7 +401,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>17</FileNumber>
+      <FileNumber>16</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -428,7 +414,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>18</FileNumber>
+      <FileNumber>17</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -441,7 +427,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>19</FileNumber>
+      <FileNumber>18</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -454,7 +440,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>20</FileNumber>
+      <FileNumber>19</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -467,7 +453,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>21</FileNumber>
+      <FileNumber>20</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -480,7 +466,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>22</FileNumber>
+      <FileNumber>21</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -493,7 +479,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>23</FileNumber>
+      <FileNumber>22</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -506,7 +492,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>24</FileNumber>
+      <FileNumber>23</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -519,7 +505,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>25</FileNumber>
+      <FileNumber>24</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -532,7 +518,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>26</FileNumber>
+      <FileNumber>25</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -545,7 +531,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>27</FileNumber>
+      <FileNumber>26</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -558,7 +544,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>28</FileNumber>
+      <FileNumber>27</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -571,7 +557,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>29</FileNumber>
+      <FileNumber>28</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -584,7 +570,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>30</FileNumber>
+      <FileNumber>29</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -597,7 +583,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>31</FileNumber>
+      <FileNumber>30</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -610,7 +596,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>32</FileNumber>
+      <FileNumber>31</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -625,13 +611,13 @@
 
   <Group>
     <GroupName>usbcore</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>33</FileNumber>
+      <FileNumber>32</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -644,7 +630,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>34</FileNumber>
+      <FileNumber>33</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -657,7 +643,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>35</FileNumber>
+      <FileNumber>34</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -670,7 +656,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>36</FileNumber>
+      <FileNumber>35</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -683,7 +669,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>37</FileNumber>
+      <FileNumber>36</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -696,7 +682,7 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>38</FileNumber>
+      <FileNumber>37</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -711,13 +697,13 @@
 
   <Group>
     <GroupName>usbconfig</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>39</FileNumber>
+      <FileNumber>38</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -730,7 +716,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>40</FileNumber>
+      <FileNumber>39</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -743,7 +729,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>41</FileNumber>
+      <FileNumber>40</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -756,7 +742,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>42</FileNumber>
+      <FileNumber>41</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -769,7 +755,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>43</FileNumber>
+      <FileNumber>42</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -782,7 +768,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>44</FileNumber>
+      <FileNumber>43</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>

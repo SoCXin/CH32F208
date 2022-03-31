@@ -4,672 +4,839 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Interface functions to USB cell registers
-*******************************************************************************/ 
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
+*******************************************************************************/
 #include "usb_lib.h"
 
-/*******************************************************************************
-* Function Name  : SetCNTR.
-* Description    : Set the CNTR register value.
-* Input          : wRegValue: new register value.
-* Return         : None.
-*******************************************************************************/
-void SetCNTR(uint16_t wRegValue)
+/*********************************************************************
+ * @fn      SetCNTR.
+ *
+ * @brief   Set the CNTR register value.
+ *
+ * @param   wRegValue - new register value.
+ *
+ * @return  none
+ */	
+void SetCNTR( uint16_t wRegValue )
 {
-  _SetCNTR(wRegValue);
+    _SetCNTR( wRegValue );
 }
 
-/*******************************************************************************
-* Function Name  : GetCNTR.
-* Description    : returns the CNTR register value.
-* Input          : None.
-* Return         : CNTR register Value.
-*******************************************************************************/
-uint16_t GetCNTR(void)
+/*********************************************************************
+ * @fn      GetCNTR.
+ *
+ * @brief   returns the CNTR register value.
+ *
+ * @return  CNTR register Value.
+ */
+uint16_t GetCNTR( void )
 {
-  return(_GetCNTR());
+    return( _GetCNTR() );
 }
 
-/*******************************************************************************
-* Function Name  : SetISTR.
-* Description    : Set the ISTR register value.
-* Input          : wRegValue: new register value.
-* Return         : None.
-*******************************************************************************/
-void SetISTR(uint16_t wRegValue)
+/*********************************************************************
+ * @fn      SetISTR.
+ *
+ * @brief   Set the CNTR register value.
+ *
+ * @param   wRegValue - new register value.
+ *
+ * @return  none
+ */	
+void SetISTR( uint16_t wRegValue )
 {
-  _SetISTR(wRegValue);
+    _SetISTR( wRegValue );
 }
 
-/*******************************************************************************
-* Function Name  : GetISTR
-* Description    : Returns the ISTR register value.
-* Input          : None.
-* Return         : ISTR register Value
-*******************************************************************************/
-uint16_t GetISTR(void)
+/*********************************************************************
+ * @fn      GetISTR
+ *
+ * @brief   Returns the ISTR register value.
+ *
+ * @return  ISTR register Value
+ */
+uint16_t GetISTR( void )
 {
-  return(_GetISTR());
+    return( _GetISTR() );
 }
 
-/*******************************************************************************
-* Function Name  : GetFNR
-* Description    : Returns the FNR register value.
-* Input          : None.
-* Return         : FNR register Value
-*******************************************************************************/
-uint16_t GetFNR(void)
+/*********************************************************************
+ * @fn      GetFNR
+ *
+ * @brief   Returns the FNR register value.
+ *
+ * @return  FNR register Value
+ */
+uint16_t GetFNR( void )
 {
-  return(_GetFNR());
+    return( _GetFNR() );
 }
 
-/*******************************************************************************
-* Function Name  : SetDADDR
-* Description    : Set the DADDR register value.
-* Input          : wRegValue: new register value.
-* Return         : None.
-*******************************************************************************/
-void SetDADDR(uint16_t wRegValue)
+/*********************************************************************
+ * @fn      SetDADDR
+ *
+ * @brief   Set the DADDR register value.
+ *
+ * @param   wRegValue - new register value.
+ *
+ * @return  none
+ */
+void SetDADDR( uint16_t wRegValue )
 {
-  _SetDADDR(wRegValue);
+    _SetDADDR( wRegValue );
 }
 
-/*******************************************************************************
-* Function Name  : GetDADDR
-* Description    : Returns the DADDR register value.
-* Input          : None.
-* Return         : DADDR register Value
-*******************************************************************************/
-uint16_t GetDADDR(void)
+/*********************************************************************
+ * @fn      GetDADDR
+ *
+ * @brief   Returns the DADDR register value.
+ *
+ * @return  DADDR register Value
+ */
+uint16_t GetDADDR( void )
 {
-  return(_GetDADDR());
+    return( _GetDADDR() );
 }
 
-/*******************************************************************************
-* Function Name  : SetBTABLE
-* Description    : Set the BTABLE.
-* Input          : wRegValue: New register value.
-* Return         : None.
-*******************************************************************************/
-void SetBTABLE(uint16_t wRegValue)
+/*********************************************************************
+ * @fn      SetBTABLE
+ *
+ * @brief   Set the CNTR register value.
+ *
+ * @param   wRegValue - new register value.
+ *
+ * @return  none
+ */	
+void SetBTABLE( uint16_t wRegValue )
 {
-  _SetBTABLE(wRegValue);
+    _SetBTABLE( wRegValue );
 }
 
-/*******************************************************************************
-* Function Name  : GetBTABLE.
-* Description    : Returns the BTABLE register value.
-* Input          : None. 
-* Return         : BTABLE address.
-*******************************************************************************/
-uint16_t GetBTABLE(void)
+/*********************************************************************
+ * @fn      GetBTABLE.
+ *
+ * @brief   Returns the BTABLE register value.
+ *
+ * @return  BTABLE address.
+ */	
+uint16_t GetBTABLE( void )
 {
-  return(_GetBTABLE());
+    return( _GetBTABLE() );
 }
 
-/*******************************************************************************
-* Function Name  : SetENDPOINT
-* Description    : Set the Endpoint register value.
-* Input          : bEpNum: Endpoint Number. 
-*                  wRegValue.
-* Return         : None.
-*******************************************************************************/
-void SetENDPOINT(uint8_t bEpNum, uint16_t wRegValue)
+/*********************************************************************
+ * @fn      SetENDPOINT
+ *
+ * @brief   Set the Endpoint register value.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          wRegValue.
+ *
+ * @return  none
+ */	
+void SetENDPOINT( uint8_t bEpNum, uint16_t wRegValue )
 {
-  _SetENDPOINT(bEpNum, wRegValue);
+    _SetENDPOINT( bEpNum, wRegValue );
 }
 
-/*******************************************************************************
-* Function Name  : GetENDPOINT
-* Description    : Return the Endpoint register value.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Endpoint register value.
-*******************************************************************************/
-uint16_t GetENDPOINT(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetENDPOINT
+ *
+ * @brief   Return the Endpoint register value.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Endpoint register value.
+ */	
+uint16_t GetENDPOINT( uint8_t bEpNum )
 {
-  return(_GetENDPOINT(bEpNum));
+    return( _GetENDPOINT( bEpNum ) );
 }
 
-/*******************************************************************************
-* Function Name  : SetEPType
-* Description    : sets the type in the endpoint register.
-* Input          : bEpNum: Endpoint Number. 
-*                  wType: type definition.
-* Return         : None.
-*******************************************************************************/
-void SetEPType(uint8_t bEpNum, uint16_t wType)
+/*********************************************************************
+ * @fn      SetEPType
+ *
+ * @brief   Set the Endpoint register value.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          wType - type definition.
+ *
+ * @return  none
+ */	
+void SetEPType( uint8_t bEpNum, uint16_t wType )
 {
-  _SetEPType(bEpNum, wType);
+    _SetEPType( bEpNum, wType );
 }
 
 /*******************************************************************************
 * Function Name  : GetEPType
 * Description    : Returns the endpoint type.
-* Input          : bEpNum: Endpoint Number. 
+* Input          : bEpNum: Endpoint Number.
 * Return         : Endpoint Type
 *******************************************************************************/
-uint16_t GetEPType(uint8_t bEpNum)
+uint16_t GetEPType( uint8_t bEpNum )
 {
-  return(_GetEPType(bEpNum));
+    return( _GetEPType( bEpNum ) );
 }
 
-/*******************************************************************************
-* Function Name  : SetEPTxStatus
-* Description    : Set the status of Tx endpoint.
-* Input          : bEpNum: Endpoint Number. 
-*                  wState: new state.
-* Return         : None.
-*******************************************************************************/
-void SetEPTxStatus(uint8_t bEpNum, uint16_t wState)
+/*********************************************************************
+ * @fn      GetEPType
+ *
+ * @brief   Returns the endpoint type.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Endpoint Type
+ */	
+void SetEPTxStatus( uint8_t bEpNum, uint16_t wState )
 {
-  _SetEPTxStatus(bEpNum, wState);
+    _SetEPTxStatus( bEpNum, wState );
 }
 
-/*******************************************************************************
-* Function Name  : SetEPRxStatus
-* Description    : Set the status of Rx endpoint.
-* Input          : bEpNum: Endpoint Number. 
-*                  wState: new state.
-* Return         : None.
-*******************************************************************************/
-void SetEPRxStatus(uint8_t bEpNum, uint16_t wState)
+/*********************************************************************
+ * @fn      SetEPTxStatus
+ *
+ * @brief   Set the status of Tx endpoint.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          wState - new state.
+ *
+ * @return  none
+ */	
+void SetEPRxStatus( uint8_t bEpNum, uint16_t wState )
 {
-  _SetEPRxStatus(bEpNum, wState);
+    _SetEPRxStatus( bEpNum, wState );
 }
 
-/*******************************************************************************
-* Function Name  : SetDouBleBuffEPStall
-* Description    : sets the status for Double Buffer Endpoint to STALL
-* Input          : bEpNum: Endpoint Number. 
-*                  bDir: Endpoint direction.
-* Return         : None.
-*******************************************************************************/
-void SetDouBleBuffEPStall(uint8_t bEpNum, uint8_t bDir)
+/*********************************************************************
+ * @fn      SetDouBleBuffEPStall
+ *
+ * @brief   sets the status for Double Buffer Endpoint to STALL
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          wState - new state.
+ *
+ * @return  none
+ */
+void SetDouBleBuffEPStall( uint8_t bEpNum, uint8_t bDir )
 {
-  uint16_t Endpoint_DTOG_Status;
-	
-  Endpoint_DTOG_Status = GetENDPOINT(bEpNum);
-	
-  if (bDir == EP_DBUF_OUT)
-  { 
-    _SetENDPOINT(bEpNum, Endpoint_DTOG_Status & ~EPRX_DTOG1);
-  }
-  else if (bDir == EP_DBUF_IN)
-  { 
-    _SetENDPOINT(bEpNum, Endpoint_DTOG_Status & ~EPTX_DTOG1);
-  }
+    uint16_t Endpoint_DTOG_Status;
+
+    Endpoint_DTOG_Status = GetENDPOINT( bEpNum );
+
+    if( bDir == EP_DBUF_OUT )
+    {
+        _SetENDPOINT( bEpNum, Endpoint_DTOG_Status & ~EPRX_DTOG1 );
+    }
+    else if( bDir == EP_DBUF_IN )
+    {
+        _SetENDPOINT( bEpNum, Endpoint_DTOG_Status & ~EPTX_DTOG1 );
+    }
 }
 
-/*******************************************************************************
-* Function Name  : GetEPTxStatus
-* Description    : Returns the endpoint Tx status.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Endpoint TX Status
-*******************************************************************************/
-uint16_t GetEPTxStatus(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPTxStatus
+ *
+ * @brief   Returns the endpoint Tx status.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Endpoint TX Status
+ */
+uint16_t GetEPTxStatus( uint8_t bEpNum )
 {
-  return(_GetEPTxStatus(bEpNum));
+    return( _GetEPTxStatus( bEpNum ) );
 }
 
-/*******************************************************************************
-* Function Name  : GetEPRxStatus
-* Description    : Returns the endpoint Rx status.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Endpoint RX Status
-*******************************************************************************/
-uint16_t GetEPRxStatus(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPRxStatus
+ *
+ * @brief   Returns the endpoint Tx status.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Endpoint RX Status
+ */
+uint16_t GetEPRxStatus( uint8_t bEpNum )
 {
-  return(_GetEPRxStatus(bEpNum));
+    return( _GetEPRxStatus( bEpNum ) );
 }
 
-/*******************************************************************************
-* Function Name  : SetEPTxValid
-* Description    : Valid the endpoint Tx Status.
-* Input          : bEpNum: Endpoint Number.  
-* Return         : None.
-*******************************************************************************/
-void SetEPTxValid(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      SetEPTxValid
+ *
+ * @brief   Valid the endpoint Tx Status.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void SetEPTxValid( uint8_t bEpNum )
 {
-  _SetEPTxStatus(bEpNum, EP_TX_VALID);
+    _SetEPTxStatus( bEpNum, EP_TX_VALID );
 }
 
-/*******************************************************************************
-* Function Name  : SetEPRxValid
-* Description    : Valid the endpoint Rx Status.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void SetEPRxValid(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      SetEPRxValid
+ *
+ * @brief   Valid the endpoint Rx Status.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void SetEPRxValid( uint8_t bEpNum )
 {
-  _SetEPRxStatus(bEpNum, EP_RX_VALID);
+    _SetEPRxStatus( bEpNum, EP_RX_VALID );
 }
 
-/*******************************************************************************
-* Function Name  : SetEP_KIND
-* Description    : Clear the EP_KIND bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void SetEP_KIND(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      SetEP_KIND
+ *
+ * @brief   Clear the EP_KIND bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void SetEP_KIND( uint8_t bEpNum )
 {
-  _SetEP_KIND(bEpNum);
+    _SetEP_KIND( bEpNum );
 }
 
-/*******************************************************************************
-* Function Name  : ClearEP_KIND
-* Description    : set the  EP_KIND bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ClearEP_KIND(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ClearEP_KIND
+ *
+ * @brief   set the  EP_KIND bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ClearEP_KIND( uint8_t bEpNum )
 {
-  _ClearEP_KIND(bEpNum);
+    _ClearEP_KIND( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : Clear_Status_Out
-* Description    : Clear the Status Out of the related Endpoint
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void Clear_Status_Out(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      Clear_Status_Out
+ *
+ * @brief   Clear the Status Out of the related Endpoint
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void Clear_Status_Out( uint8_t bEpNum )
 {
-  _ClearEP_KIND(bEpNum);
+    _ClearEP_KIND( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : Set_Status_Out
-* Description    : Set the Status Out of the related Endpoint
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void Set_Status_Out(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      Set_Status_Out
+ *
+ * @brief   Set the Status Out of the related Endpoint
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void Set_Status_Out( uint8_t bEpNum )
 {
-  _SetEP_KIND(bEpNum);
+    _SetEP_KIND( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : SetEPDoubleBuff
-* Description    : Enable the double buffer feature for the endpoint. 
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void SetEPDoubleBuff(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      SetEPDoubleBuff
+ *
+ * @brief   Enable the double buffer feature for the endpoint. 
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void SetEPDoubleBuff( uint8_t bEpNum )
 {
-  _SetEP_KIND(bEpNum);
+    _SetEP_KIND( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : ClearEPDoubleBuff
-* Description    : Disable the double buffer feature for the endpoint. 
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ClearEPDoubleBuff(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ClearEPDoubleBuff
+ *
+ * @brief   Disable the double buffer feature for the endpoint. 
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ClearEPDoubleBuff( uint8_t bEpNum )
 {
-  _ClearEP_KIND(bEpNum);
+    _ClearEP_KIND( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : GetTxStallStatus
-* Description    : Returns the Stall status of the Tx endpoint.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Tx Stall status.
-*******************************************************************************/
-uint16_t GetTxStallStatus(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetTxStallStatus
+ *
+ * @brief   Returns the Stall status of the Tx endpoint.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+uint16_t GetTxStallStatus( uint8_t bEpNum )
 {
-  return(_GetTxStallStatus(bEpNum));
+    return( _GetTxStallStatus( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : GetRxStallStatus
-* Description    : Returns the Stall status of the Rx endpoint. 
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Rx Stall status.
-*******************************************************************************/
-uint16_t GetRxStallStatus(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetRxStallStatus
+ *
+ * @brief   Returns the Stall status of the Rx endpoint.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Rx Stall status.
+ */
+uint16_t GetRxStallStatus( uint8_t bEpNum )
 {
-  return(_GetRxStallStatus(bEpNum));
+    return( _GetRxStallStatus( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : ClearEP_CTR_RX
-* Description    : Clear the CTR_RX bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ClearEP_CTR_RX(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ClearEP_CTR_RX
+ *
+ * @brief   Clear the CTR_RX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ClearEP_CTR_RX( uint8_t bEpNum )
 {
-  _ClearEP_CTR_RX(bEpNum);
+    _ClearEP_CTR_RX( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : ClearEP_CTR_TX
-* Description    : Clear the CTR_TX bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ClearEP_CTR_TX(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ClearEP_CTR_TX
+ *
+ * @brief   Clear the CTR_TX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ClearEP_CTR_TX( uint8_t bEpNum )
 {
-  _ClearEP_CTR_TX(bEpNum);
+    _ClearEP_CTR_TX( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : ToggleDTOG_RX
-* Description    : Toggle the DTOG_RX bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ToggleDTOG_RX(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ToggleDTOG_RX
+ *
+ * @brief   Toggle the DTOG_RX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ToggleDTOG_RX( uint8_t bEpNum )
 {
-  _ToggleDTOG_RX(bEpNum);
+    _ToggleDTOG_RX( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : ToggleDTOG_TX
-* Description    : Toggle the DTOG_TX bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ToggleDTOG_TX(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ToggleDTOG_TX
+ *
+ * @brief   Toggle the DTOG_TX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ToggleDTOG_TX( uint8_t bEpNum )
 {
-  _ToggleDTOG_TX(bEpNum);
+    _ToggleDTOG_TX( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : ClearDTOG_RX.
-* Description    : Clear the DTOG_RX bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ClearDTOG_RX(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ClearDTOG_RX.
+ *
+ * @brief   Clear the DTOG_RX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ClearDTOG_RX( uint8_t bEpNum )
 {
-  _ClearDTOG_RX(bEpNum);
+    _ClearDTOG_RX( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : ClearDTOG_TX.
-* Description    : Clear the DTOG_TX bit.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : None.
-*******************************************************************************/
-void ClearDTOG_TX(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      ClearDTOG_TX.
+ *
+ * @brief   Clear the DTOG_TX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  none
+ */
+void ClearDTOG_TX( uint8_t bEpNum )
 {
-  _ClearDTOG_TX(bEpNum);
+    _ClearDTOG_TX( bEpNum );
 }
-/*******************************************************************************
-* Function Name  : SetEPAddress
-* Description    : Set the endpoint address.
-* Input          : bEpNum: Endpoint Number.
-*                  bAddr: New endpoint address.
-* Return         : None.
-*******************************************************************************/
-void SetEPAddress(uint8_t bEpNum, uint8_t bAddr)
+/*********************************************************************
+ * @fn      SetEPAddress
+ *
+ * @brief   Set the endpoint address.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          bAddr - New endpoint address.
+ *
+ * @return  none
+ */
+void SetEPAddress( uint8_t bEpNum, uint8_t bAddr )
 {
-  _SetEPAddress(bEpNum, bAddr);
+    _SetEPAddress( bEpNum, bAddr );
 }
-/*******************************************************************************
-* Function Name  : GetEPAddress
-* Description    : Get the endpoint address.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Endpoint address.
-*******************************************************************************/
-uint8_t GetEPAddress(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPAddress
+ *
+ * @brief   Clear the DTOG_TX bit.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Endpoint address.
+ */
+uint8_t GetEPAddress( uint8_t bEpNum )
 {
-  return(_GetEPAddress(bEpNum));
+    return( _GetEPAddress( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : SetEPTxAddr
-* Description    : Set the endpoint Tx buffer address.
-* Input          : bEpNum: Endpoint Number.
-*                  wAddr: new address. 
-* Return         : None.
-*******************************************************************************/
-void SetEPTxAddr(uint8_t bEpNum, uint16_t wAddr)
+/*********************************************************************
+ * @fn      SetEPTxAddr
+ *
+ * @brief   Set the endpoint Tx buffer address.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          bAddr - New endpoint address.
+ *
+ * @return  none
+ */
+void SetEPTxAddr( uint8_t bEpNum, uint16_t wAddr )
 {
-  _SetEPTxAddr(bEpNum, wAddr);
+    _SetEPTxAddr( bEpNum, wAddr );
 }
-/*******************************************************************************
-* Function Name  : SetEPRxAddr
-* Description    : Set the endpoint Rx buffer address.
-* Input          : bEpNum: Endpoint Number.
-*                  wAddr: new address.
-* Return         : None.
-*******************************************************************************/
-void SetEPRxAddr(uint8_t bEpNum, uint16_t wAddr)
+/*********************************************************************
+ * @fn      SetEPRxAddr
+ *
+ * @brief   Set the endpoint Rx buffer address.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          bAddr - New endpoint address.
+ *
+ * @return  none
+ */
+void SetEPRxAddr( uint8_t bEpNum, uint16_t wAddr )
 {
-  _SetEPRxAddr(bEpNum, wAddr);
+    _SetEPRxAddr( bEpNum, wAddr );
 }
-/*******************************************************************************
-* Function Name  : GetEPTxAddr
-* Description    : Returns the endpoint Tx buffer address.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Rx buffer address. 
-*******************************************************************************/
-uint16_t GetEPTxAddr(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPTxAddr
+ *
+ * @brief   Returns the endpoint Tx buffer address.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Rx buffer address. 
+ */
+uint16_t GetEPTxAddr( uint8_t bEpNum )
 {
-  return(_GetEPTxAddr(bEpNum));
+    return( _GetEPTxAddr( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : GetEPRxAddr.
-* Description    : Returns the endpoint Rx buffer address.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Rx buffer address.
-*******************************************************************************/
-uint16_t GetEPRxAddr(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPRxAddr.
+ *
+ * @brief   Returns the endpoint Rx buffer address.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Rx buffer address. 
+ */
+uint16_t GetEPRxAddr( uint8_t bEpNum )
 {
-  return(_GetEPRxAddr(bEpNum));
+    return( _GetEPRxAddr( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : SetEPTxCount.
-* Description    : Set the Tx count.
-* Input          : bEpNum: Endpoint Number.
-*                  wCount: new count value.
-* Return         : None.
-*******************************************************************************/
-void SetEPTxCount(uint8_t bEpNum, uint16_t wCount)
+/*********************************************************************
+ * @fn      SetEPTxCount.
+ *
+ * @brief   Set the Tx count.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          wCount - new count value.
+ *
+ * @return  none
+ */
+void SetEPTxCount( uint8_t bEpNum, uint16_t wCount )
 {
-  _SetEPTxCount(bEpNum, wCount);
+    _SetEPTxCount( bEpNum, wCount );
 }
-/*******************************************************************************
-* Function Name  : SetEPCountRxReg.
-* Description    : Set the Count Rx Register value.
-* Input          : *pdwReg: point to the register.
-*                  wCount: the new register value.
-* Return         : None.
-*******************************************************************************/
-void SetEPCountRxReg(uint32_t *pdwReg, uint16_t wCount)
+/*********************************************************************
+ * @fn      SetEPCountRxReg.
+ *
+ * @brief   Set the Count Rx Register value.
+ *
+ * @param   *pdwReg - Endpoint Number. 
+ *          wCount - new count value.
+ *
+ * @return  none
+ */
+void SetEPCountRxReg( uint32_t *pdwReg, uint16_t wCount )
 {
-  _SetEPCountRxReg(dwReg, wCount);
+    _SetEPCountRxReg( dwReg, wCount );
 }
-/*******************************************************************************
-* Function Name  : SetEPRxCount
-* Description    : Set the Rx count.
-* Input          : bEpNum: Endpoint Number. 
-*                  wCount: the new count value.
-* Return         : None.
-*******************************************************************************/
-void SetEPRxCount(uint8_t bEpNum, uint16_t wCount)
+/*********************************************************************
+ * @fn      SetEPTxCount.
+ *
+ * @brief   Set the Tx count.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *          wCount - new count value.
+ *
+ * @return  none
+ */
+void SetEPRxCount( uint8_t bEpNum, uint16_t wCount )
 {
-  _SetEPRxCount(bEpNum, wCount);
+    _SetEPRxCount( bEpNum, wCount );
 }
-/*******************************************************************************
-* Function Name  : GetEPTxCount
-* Description    : Get the Tx count.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Tx count value.
-*******************************************************************************/
-uint16_t GetEPTxCount(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPTxCount
+ *
+ * @brief   Get the Tx count.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Tx count value.
+ */
+uint16_t GetEPTxCount( uint8_t bEpNum )
 {
-  return(_GetEPTxCount(bEpNum));
+    return( _GetEPTxCount( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : GetEPRxCount
-* Description    : Get the Rx count.
-* Input          : bEpNum: Endpoint Number. 
-* Return         : Rx count value.
-*******************************************************************************/
-uint16_t GetEPRxCount(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPRxCount
+ *
+ * @brief   Get the Rx count.
+ *
+ * @param   bEpNum - Endpoint Number. 
+ *
+ * @return  Rx count value.
+ */
+uint16_t GetEPRxCount( uint8_t bEpNum )
 {
-  return(_GetEPRxCount(bEpNum));
+    return( _GetEPRxCount( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : SetEPDblBuffAddr
-* Description    : Set the addresses of the buffer 0 and 1.
-* Input          : bEpNum: Endpoint Number.  
-*                  wBuf0Addr: new address of buffer 0. 
-*                  wBuf1Addr: new address of buffer 1.
-* Return         : None.
-*******************************************************************************/
-void SetEPDblBuffAddr(uint8_t bEpNum, uint16_t wBuf0Addr, uint16_t wBuf1Addr)
+/*********************************************************************
+ * @fn      SetEPDblBuffAddr
+ *
+ * @brief   Set the addresses of the buffer 0 and 1.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *          wBuf0Addr - new address of buffer 0. 
+ *          wBuf1Addr - new address of buffer 1.
+ *
+ * @return  none
+ */
+void SetEPDblBuffAddr( uint8_t bEpNum, uint16_t wBuf0Addr, uint16_t wBuf1Addr )
 {
-  _SetEPDblBuffAddr(bEpNum, wBuf0Addr, wBuf1Addr);
+    _SetEPDblBuffAddr( bEpNum, wBuf0Addr, wBuf1Addr );
 }
-/*******************************************************************************
-* Function Name  : SetEPDblBuf0Addr
-* Description    : Set the Buffer 1 address.
-* Input          : bEpNum: Endpoint Number
-*                  wBuf0Addr: new address.
-* Return         : None.
-*******************************************************************************/
-void SetEPDblBuf0Addr(uint8_t bEpNum, uint16_t wBuf0Addr)
+/*********************************************************************
+ * @fn      SetEPDblBuf0Addr
+ *
+ * @brief   Set the Buffer 1 address.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *          wBuf0Addr - new address.
+ *
+ * @return  none
+ */
+void SetEPDblBuf0Addr( uint8_t bEpNum, uint16_t wBuf0Addr )
 {
-  _SetEPDblBuf0Addr(bEpNum, wBuf0Addr);
+    _SetEPDblBuf0Addr( bEpNum, wBuf0Addr );
 }
-/*******************************************************************************
-* Function Name  : SetEPDblBuf1Addr
-* Description    : Set the Buffer 1 address.
-* Input          : bEpNum: Endpoint Number
-*                  wBuf1Addr: new address.
-* Return         : None.
-*******************************************************************************/
-void SetEPDblBuf1Addr(uint8_t bEpNum, uint16_t wBuf1Addr)
+/*********************************************************************
+ * @fn      SetEPDblBuf1Addr
+ *
+ * @brief   Set the Buffer 1 address.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *          wBuf1Addr - new address.
+ *
+ * @return  none
+ */
+void SetEPDblBuf1Addr( uint8_t bEpNum, uint16_t wBuf1Addr )
 {
-  _SetEPDblBuf1Addr(bEpNum, wBuf1Addr);
+    _SetEPDblBuf1Addr( bEpNum, wBuf1Addr );
 }
-/*******************************************************************************
-* Function Name  : GetEPDblBuf0Addr
-* Description    : Returns the address of the Buffer 0.
-* Input          : bEpNum: Endpoint Number.
-* Return         : None.
-*******************************************************************************/
-uint16_t GetEPDblBuf0Addr(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPDblBuf0Addr
+ *
+ * @brief   Returns the address of the Buffer 0.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *
+ * @return  none
+ */
+uint16_t GetEPDblBuf0Addr( uint8_t bEpNum )
 {
-  return(_GetEPDblBuf0Addr(bEpNum));
+    return( _GetEPDblBuf0Addr( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : GetEPDblBuf1Addr
-* Description    : Returns the address of the Buffer 1.
-* Input          : bEpNum: Endpoint Number.
-* Return         : Address of the Buffer 1.
-*******************************************************************************/
-uint16_t GetEPDblBuf1Addr(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPDblBuf1Addr
+ *
+ * @brief   Returns the address of the Buffer 1.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *
+ * @return  Address of the Buffer 1.
+ */
+uint16_t GetEPDblBuf1Addr( uint8_t bEpNum )
 {
-  return(_GetEPDblBuf1Addr(bEpNum));
+    return( _GetEPDblBuf1Addr( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : SetEPDblBuffCount
-* Description    : Set the number of bytes for a double Buffer 
-*                  endpoint.
-* Input          : bEpNum,bDir, wCount
-* Return         : None.
-*******************************************************************************/
-void SetEPDblBuffCount(uint8_t bEpNum, uint8_t bDir, uint16_t wCount)
+/*********************************************************************
+ * @fn      SetEPDblBuffCount
+ *
+ * @brief   Set the number of bytes for a double Buffer endpoint. 
+ *
+ * @param   bEpNum,bDir, wCount
+ *
+ * @return  none
+ */
+void SetEPDblBuffCount( uint8_t bEpNum, uint8_t bDir, uint16_t wCount )
 {
-  _SetEPDblBuffCount(bEpNum, bDir, wCount);
+    _SetEPDblBuffCount( bEpNum, bDir, wCount );
 }
-/*******************************************************************************
-* Function Name  : SetEPDblBuf0Count
-* Description    : Set the number of bytes in the buffer 0 of a double Buffer 
-*                  endpoint.
-* Input          : bEpNum, bDir,  wCount
-* Return         : None.
-*******************************************************************************/
-void SetEPDblBuf0Count(uint8_t bEpNum, uint8_t bDir, uint16_t wCount)
+/*********************************************************************
+ * @fn      SetEPDblBuf0Count
+ *
+ * @brief   Set the number of bytes for a double Buffer endpoint. 
+ *
+ * @param   bEpNum,bDir, wCount
+ *
+ * @return  none
+ */
+void SetEPDblBuf0Count( uint8_t bEpNum, uint8_t bDir, uint16_t wCount )
 {
-  _SetEPDblBuf0Count(bEpNum, bDir, wCount);
+    _SetEPDblBuf0Count( bEpNum, bDir, wCount );
 }
-/*******************************************************************************
-* Function Name  : SetEPDblBuf1Count
-* Description    : Set the number of bytes in the buffer 0 of a double Buffer 
-*                  endpoint.
-* Input          : bEpNum,  bDir,  wCount
-* Return         : None.
-*******************************************************************************/
-void SetEPDblBuf1Count(uint8_t bEpNum, uint8_t bDir, uint16_t wCount)
+/*********************************************************************
+ * @fn      SetEPDblBuf1Count
+ *
+ * @brief   Set the number of bytes for a double Buffer endpoint. 
+ *
+ * @param   bEpNum,bDir, wCount
+ *
+ * @return  none
+ */
+void SetEPDblBuf1Count( uint8_t bEpNum, uint8_t bDir, uint16_t wCount )
 {
-  _SetEPDblBuf1Count(bEpNum, bDir, wCount);
+    _SetEPDblBuf1Count( bEpNum, bDir, wCount );
 }
-/*******************************************************************************
-* Function Name  : GetEPDblBuf0Count
-* Description    : Returns the number of byte received in the buffer 0 of a double
-*                  Buffer endpoint.
-* Input          : bEpNum: Endpoint Number.
-* Return         : Endpoint Buffer 0 count
-*******************************************************************************/
-uint16_t GetEPDblBuf0Count(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPDblBuf0Count
+ *
+ * @brief   Returns the number of byte received in the buffer 0 of a double 
+ *           Buffer endpoint.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *
+ * @return  Endpoint Buffer 0 count
+ */
+uint16_t GetEPDblBuf0Count( uint8_t bEpNum )
 {
-  return(_GetEPDblBuf0Count(bEpNum));
+    return( _GetEPDblBuf0Count( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : GetEPDblBuf1Count
-* Description    : Returns the number of data received in the buffer 1 of a double
-*                  Buffer endpoint.
-* Input          : bEpNum: Endpoint Number.
-* Output         : None.
-* Return         : Endpoint Buffer 1 count.
-*******************************************************************************/
-uint16_t GetEPDblBuf1Count(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPDblBuf1Count
+ *
+ * @brief   Returns the number of byte received in the buffer 1 of a double 
+ *           Buffer endpoint.
+ *
+ * @param   bEpNum - Endpoint Number.
+ *
+ * @return  Endpoint Buffer 1 count
+ */
+uint16_t GetEPDblBuf1Count( uint8_t bEpNum )
 {
-  return(_GetEPDblBuf1Count(bEpNum));
+    return( _GetEPDblBuf1Count( bEpNum ) );
 }
-/*******************************************************************************
-* Function Name  : GetEPDblBufDir
-* Description    : gets direction of the double buffered endpoint
-* Input          : bEpNum: Endpoint Number. 
-* Return         : EP_DBUF_OUT, EP_DBUF_IN,
-*                  EP_DBUF_ERR if the endpoint counter not yet programmed.
-*******************************************************************************/
-EP_DBUF_DIR GetEPDblBufDir(uint8_t bEpNum)
+/*********************************************************************
+ * @fn      GetEPDblBufDir
+ *
+ * @brief   gets direction of the double buffered endpoint
+ *
+ * @param   bEpNum - Endpoint Number.
+ *
+ * @return  EP_DBUF_OUT, EP_DBUF_IN,
+ *          EP_DBUF_ERR if the endpoint counter not yet programmed.
+ */
+EP_DBUF_DIR GetEPDblBufDir( uint8_t bEpNum )
 {
-  if ((uint16_t)(*_pEPRxCount(bEpNum) & 0xFC00) != 0)
-    return(EP_DBUF_OUT);
-  else if (((uint16_t)(*_pEPTxCount(bEpNum)) & 0x03FF) != 0)
-    return(EP_DBUF_IN);
-  else
-    return(EP_DBUF_ERR);
+    if( ( uint16_t )( *_pEPRxCount( bEpNum ) & 0xFC00 ) != 0 )
+    {
+        return( EP_DBUF_OUT );
+    }
+    else if( ( ( uint16_t )( *_pEPTxCount( bEpNum ) ) & 0x03FF ) != 0 )
+    {
+        return( EP_DBUF_IN );
+    }
+    else
+    {
+        return( EP_DBUF_ERR );
+    }
 }
-/*******************************************************************************
-* Function Name  : FreeUserBuffer
-* Description    : free buffer used from the application realizing it to the line
-                   toggles bit SW_BUF in the double buffered endpoint register
-* Input          : bEpNum, bDir
-* Return         : None.
-*******************************************************************************/
-void FreeUserBuffer(uint8_t bEpNum, uint8_t bDir)
+/*********************************************************************
+ * @fn      FreeUserBuffer
+ *
+ * @brief   free buffer used from the application realizing it to the line
+ *          toggles bit SW_BUF in the double buffered endpoint register
+ *
+ * @param   bEpNum, bDir
+ *
+ * @return  none
+ */
+void FreeUserBuffer( uint8_t bEpNum, uint8_t bDir )
 {
-  if (bDir == EP_DBUF_OUT)
-  {
-    _ToggleDTOG_TX(bEpNum);
-  }
-  else if (bDir == EP_DBUF_IN)
-  { 
-    _ToggleDTOG_RX(bEpNum);
-  }
+    if( bDir == EP_DBUF_OUT )
+    {
+        _ToggleDTOG_TX( bEpNum );
+    }
+    else if( bDir == EP_DBUF_IN )
+    {
+        _ToggleDTOG_RX( bEpNum );
+    }
 }
 
-/*******************************************************************************
-* Function Name  : ToWord
-* Description    : merge two byte in a word.
-* Input          : bh: byte high, bl: bytes low.
-* Return         : resulted word.
-*******************************************************************************/
-uint16_t ToWord(uint8_t bh, uint8_t bl)
+/*********************************************************************
+ * @fn      ToWord
+ *
+ * @brief   merge two byte in a word.
+ *
+ * @param   bh - byte high, bl - bytes low.
+ *
+ * @return  resulted word
+ */
+uint16_t ToWord( uint8_t bh, uint8_t bl )
 {
-  uint16_t wRet;
-  wRet = (uint16_t)bl | ((uint16_t)bh << 8);
-	
-  return(wRet);
+    uint16_t wRet;
+    wRet = ( uint16_t )bl | ( ( uint16_t )bh << 8 );
+
+    return( wRet );
 }
-/*******************************************************************************
-* Function Name  : ByteSwap
-* Description    : Swap two byte in a word.
-* Input          : wSwW: word to Swap.
-* Return         : resulted word.
-*******************************************************************************/
-uint16_t ByteSwap(uint16_t wSwW)
+/*********************************************************************
+ * @fn      ByteSwap
+ *
+ * @brief   Swap two byte in a word.
+ *
+ * @param   wSwW - word to Swap
+ *
+ * @return  resulted word
+ */
+uint16_t ByteSwap( uint16_t wSwW )
 {
-  uint8_t bTemp;
-  uint16_t wRet;
-  bTemp = (uint8_t)(wSwW & 0xff);
-  wRet =  (wSwW >> 8) | ((uint16_t)bTemp << 8);
-	
-  return(wRet);
+    uint8_t bTemp;
+    uint16_t wRet;
+    bTemp = ( uint8_t )( wSwW & 0xff );
+    wRet = ( wSwW >> 8 ) | ( ( uint16_t )bTemp << 8 );
+
+    return( wRet );
 }

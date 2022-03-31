@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : All processing related to Virtual Com Port Demo
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #include "usb_lib.h"
 #include "usb_conf.h"
@@ -70,12 +72,13 @@ ONE_DESCRIPTOR String_Descriptor[4] =
 };
 
 
-/*******************************************************************************
-* Function Name  : USBD_SetConfiguration.
-* Description    : Update the device state to configured.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_SetConfiguration.
+ *
+ * @brief   Update the device state to configured.
+ *
+ * @return  none
+ */
 void USBD_SetConfiguration(void)
 {
   DEVICE_INFO *pInfo = &Device_Info;
@@ -86,45 +89,49 @@ void USBD_SetConfiguration(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : USBD_SetDeviceAddress.
-* Description    : Update the device state to addressed.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_SetDeviceAddress.
+ *
+ * @brief   Update the device state to addressed.
+ *
+ * @return  none
+ */
 void USBD_SetDeviceAddress (void)
 {
   bDeviceState = ADDRESSED;
 }
 
-/*******************************************************************************
-* Function Name  : USBD_Status_In.
-* Description    : USBD Status In Routine.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_Status_In.
+ *
+ * @brief   USBD Status In Routine.
+ *
+ * @return  none
+ */
 void USBD_Status_In(void)
 {
  
 }
 
-/*******************************************************************************
-* Function Name  : USBD_Status_Out
-* Description    : USBD Status OUT Routine.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_Status_Out
+ *
+ * @brief   USBD Status OUT Routine.
+ *
+ * @return  none
+ */
 void USBD_Status_Out(void)
 {
     
 }
 
-/*******************************************************************************
-* Function Name  : USB_init.
-* Description    : init routine.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_init.
+ *
+ * @brief   init routine.
+ *
+ * @return  none
+ */
 void USBD_init(void)
 {
   uint8_t	i;
@@ -137,12 +144,13 @@ void USBD_init(void)
   bDeviceState = UNCONNECTED;
 }
 
-/*******************************************************************************
-* Function Name  : USBD_Reset
-* Description    : Virtual_Com_Port Mouse reset routine
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_Reset
+ *
+ * @brief   Virtual_Com_Port Mouse reset routine
+ *
+ * @return  none
+ */
 void USBD_Reset(void)
 {
   pInformation->Current_Configuration = 0;
@@ -190,34 +198,43 @@ void USBD_Reset(void)
   bDeviceState = ATTACHED;
 }
 
-/*******************************************************************************
-* Function Name  : USBD_GetDeviceDescriptor.
-* Description    : Gets the device descriptor.
-* Input          : Length.
-* Return         : The address of the device descriptor.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_GetDeviceDescriptor.
+ *
+ * @brief   Gets the device descriptor.
+ *
+ * @param   Length.
+ *
+ * @return  The address of the device descriptor.
+ */
 uint8_t *USBD_GetDeviceDescriptor(uint16_t Length)
 {
   return Standard_GetDescriptorData(Length, &Device_Descriptor);
 }
 
-/*******************************************************************************
-* Function Name  : USBD_GetConfigDescriptor.
-* Description    : get the configuration descriptor.
-* Input          : Length.
-* Return         : The address of the configuration descriptor.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_GetConfigDescriptor.
+ *
+ * @brief   get the configuration descriptor.
+ *
+ * @param   Length.
+ *
+ * @return  The address of the device descriptor.
+ */
 uint8_t *USBD_GetConfigDescriptor(uint16_t Length)
 {
   return Standard_GetDescriptorData(Length, &Config_Descriptor);
 }
 
-/*******************************************************************************
-* Function Name  : USBD_GetStringDescriptor
-* Description    : Gets the string descriptors according to the needed index
-* Input          : Length.
-* Return         : The address of the string descriptors.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_GetStringDescriptor
+ *
+ * @brief   Gets the string descriptors according to the needed index
+ *
+ * @param   Length.
+ *
+ * @return  The address of the device descriptor.
+ */
 uint8_t *USBD_GetStringDescriptor(uint16_t Length)
 {
   uint8_t wValue0 = pInformation->USBwValue0;
@@ -232,14 +249,17 @@ uint8_t *USBD_GetStringDescriptor(uint16_t Length)
   }
 }
 
-/*******************************************************************************
-* Function Name  : USBD_Get_Interface_Setting.
-* Description    : test the interface and the alternate setting according to the
-*                  supported one.
-* Input1         : Interface: interface number.
-*                  AlternateSetting: Alternate Setting number.
-* Return         : The address of the string descriptors.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_Get_Interface_Setting.
+ *
+ * @brief   test the interface and the alternate setting according to the
+ *          supported one.
+ *
+ * @param   Interface - interface number.
+ *          AlternateSetting - Alternate Setting number.
+ *
+ * @return  The address of the device descriptor.
+ */
 RESULT USBD_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting)
 {
   if (AlternateSetting > 0)
@@ -254,46 +274,58 @@ RESULT USBD_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting)
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : USBD_Data_Setup
-* Description    : handle the data class specific requests
-* Input          : Request Nb.
-* Return         : USB_UNSUPPORT or USB_SUCCESS.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_Data_Setup
+ *
+ * @brief   handle the data class specific requests
+ *
+ * @param   Request Nb.
+ *
+ * @return  USB_UNSUPPORT or USB_SUCCESS.
+ */
 RESULT USBD_Data_Setup(uint8_t RequestNo)
 {
   
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : USBD_NoData_Setup.
-* Description    : handle the no data class specific requests.
-* Input          : Request Nb.
-* Return         : USB_UNSUPPORT or USB_SUCCESS.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USBD_NoData_Setup.
+ *
+ * @brief   handle the no data class specific requests.
+ *
+ * @param   Request Nb.
+ *
+ * @return  USB_UNSUPPORT or USB_SUCCESS.
+ */
 RESULT USBD_NoData_Setup(uint8_t RequestNo)
 {                                          
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : Virtual_Com_Port_GetLineCoding.
-* Description    : send the linecoding structure to the PC host.
-* Input          : Length.
-* Return         : Linecoding structure base address.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Virtual_Com_Port_GetLineCoding.
+ *
+ * @brief   send the linecoding structure to the PC host.
+ *
+ * @param   Length.
+ *
+ * @return  Linecoding structure base address.
+ */
 uint8_t *Virtual_Com_Port_GetLineCoding(uint16_t Length)
 {
   return 0;
 }
 
-/*******************************************************************************
-* Function Name  : Virtual_Com_Port_SetLineCoding.
-* Description    : Set the linecoding structure fields.
-* Input          : Length.
-* Return         : Linecoding structure base address.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Virtual_Com_Port_SetLineCoding.
+ *
+ * @brief   Set the linecoding structure fields.
+ *
+ * @param   Length.
+ *
+ * @return  Linecoding structure base address.
+ */
 uint8_t *Virtual_Com_Port_SetLineCoding(uint16_t Length)
 {
   return 0;

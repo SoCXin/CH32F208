@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : CH32F20x Device Peripheral Access Layer Header File.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/   
 #ifndef __CH32F20x_H
 #define __CH32F20x_H
@@ -11,15 +13,24 @@
 #ifdef __cplusplus
  extern "C" {
 #endif 
-  
+
+//#define CH32F20x_D6                /* CH32F203C6T6-CH32F203C8U6-CH32F203C8T6 */
+#define CH32F20x_D8              /* CH32F203CBT6-CH32F203RCT6-CH32F203VCT6 */
+//#define CH32F20x_D8C             /* CH32F207-CH32F205 */
+//#define CH32F20x_D8W             /* CH32F208 */
+
 #define __MPU_PRESENT             0 /* Other CH32 devices does not provide an MPU */
 #define __NVIC_PRIO_BITS          4 /* CH32 uses 4 Bits for the Priority Levels */
 #define __Vendor_SysTickConfig    0 /* Set to 1 if different SysTick Config is used */	 
-	 
+
+#if defined (CH32F20x_D8W) 
+#define HSE_VALUE    ((uint32_t)32000000) /* Value of the External oscillator in Hz */
+#else
 #define HSE_VALUE    ((uint32_t)8000000) /* Value of the External oscillator in Hz */
+#endif
 
 /* In the following line adjust the External High Speed oscillator (HSE) Startup Timeout value */
-#define HSE_STARTUP_TIMEOUT   ((uint16_t)0x500) /* Time out for HSE start up */
+#define HSE_STARTUP_TIMEOUT   ((uint16_t)0x1000) /* Time out for HSE start up */
 
 #define HSI_VALUE    ((uint32_t)8000000) /* Value of the Internal oscillator in Hz */
 
@@ -79,7 +90,56 @@ typedef enum IRQn
   USART3_IRQn                 = 39,      /* USART3 global Interrupt                              */
   EXTI15_10_IRQn              = 40,      /* External Line[15:10] Interrupts                      */
   RTCAlarm_IRQn               = 41,      /* RTC Alarm through EXTI Line Interrupt                */
+
+#ifdef CH32F20x_D6
   USBWakeUp_IRQn              = 42,      /* USB Device WakeUp from suspend through EXTI Line Interrupt */
+  USBHD_IRQn		              = 43,      /* USBHD global Interrupt                               */
+  USBHDWakeUp_IRQn	          = 44,      /* USB Host/Device WakeUp Interrupt                     */
+  UART4_IRQn		              = 45,      /* UART4 global Interrupt                               */
+  DMA1_Channel8_IRQn          = 46,      /* DMA1 Channel 8 global Interrupt                      */
+#endif 
+
+#ifdef CH32F20x_D8
+  USBWakeUp_IRQn              = 42,      /* USB Device WakeUp from suspend through EXTI Line Interrupt */
+  TIM8_BRK_IRQn               = 43,      /* TIM8 Break Interrupt                                 */
+  TIM8_UP_IRQn                = 44,      /* TIM8 Update Interrupt                                */
+  TIM8_TRG_COM_IRQn           = 45,      /* TIM8 Trigger and Commutation Interrupt               */
+  TIM8_CC_IRQn                = 46,      /* TIM8 Capture Compare Interrupt                       */
+  RNG_IRQn                    = 47,      /* RNG global Interrupt                                 */
+  FSMC_IRQn                   = 48,      /* FSMC global Interrupt                                */
+  SDIO_IRQn                   = 49,      /* SDIO global Interrupt                                */
+  TIM5_IRQn                   = 50,      /* TIM5 global Interrupt                                */
+  SPI3_IRQn                   = 51,      /* SPI3 global Interrupt                                */
+  UART4_IRQn                  = 52,      /* UART4 global Interrupt                               */
+  UART5_IRQn                  = 53,      /* UART5 global Interrupt                               */
+  TIM6_IRQn                   = 54,      /* TIM6 global Interrupt                                */
+  TIM7_IRQn                   = 55,      /* TIM7 global Interrupt                                */
+  DMA2_Channel1_IRQn          = 56,      /* DMA2 Channel 1 global Interrupt                      */
+  DMA2_Channel2_IRQn          = 57,      /* DMA2 Channel 2 global Interrupt                      */
+  DMA2_Channel3_IRQn          = 58,      /* DMA2 Channel 3 global Interrupt                      */
+  DMA2_Channel4_IRQn          = 59,      /* DMA2 Channel 4 global Interrupt                      */
+  DMA2_Channel5_IRQn          = 60,      /* DMA2 Channel 5 global Interrupt                      */
+  UART6_IRQn                  = 71,      /* UART6 global Interrupt                               */
+  UART7_IRQn                  = 72,      /* UART7 global Interrupt                               */
+  UART8_IRQn                  = 73,      /* UART8 global Interrupt                               */
+  TIM9_BRK_IRQn               = 74,      /* TIM9 Break Interrupt                                 */
+  TIM9_UP_IRQn                = 75,      /* TIM9 Update Interrupt                                */
+  TIM9_TRG_COM_IRQn           = 76,      /* TIM9 Trigger and Commutation Interrupt               */
+  TIM9_CC_IRQn                = 77,      /* TIM9 Capture Compare Interrupt                       */
+  TIM10_BRK_IRQn              = 78,      /* TIM10 Break Interrupt                                */
+  TIM10_UP_IRQn               = 79,      /* TIM10 Update Interrupt                               */
+  TIM10_TRG_COM_IRQn          = 80,      /* TIM10 Trigger and Commutation Interrupt              */
+  TIM10_CC_IRQn               = 81,      /* TIM10 Capture Compare Interrupt                      */
+  DMA2_Channel6_IRQn          = 82,      /* DMA2 Channel 6 global Interrupt                      */
+  DMA2_Channel7_IRQn          = 83,      /* DMA2 Channel 7 global Interrupt                      */
+  DMA2_Channel8_IRQn          = 84,      /* DMA2 Channel 8 global Interrupt                      */
+  DMA2_Channel9_IRQn          = 85,      /* DMA2 Channel 9 global Interrupt                      */
+  DMA2_Channel10_IRQn         = 86,      /* DMA2 Channel 10 global Interrupt                     */
+  DMA2_Channel11_IRQn         = 87,      /* DMA2 Channel 11 global Interrupt                     */
+
+#endif 
+
+#if defined (CH32F20x_D8C)
   TIM8_BRK_IRQn               = 43,      /* TIM8 Break Interrupt                                 */
   TIM8_UP_IRQn                = 44,      /* TIM8 Update Interrupt                                */
   TIM8_TRG_COM_IRQn           = 45,      /* TIM8 Trigger and Commutation Interrupt               */
@@ -125,6 +185,24 @@ typedef enum IRQn
   DMA2_Channel9_IRQn          = 85,      /* DMA2 Channel 9 global Interrupt                      */
   DMA2_Channel10_IRQn         = 86,      /* DMA2 Channel 10 global Interrupt                     */
   DMA2_Channel11_IRQn         = 87,      /* DMA2 Channel 11 global Interrupt                     */
+
+#endif  
+
+#ifdef CH32F20x_D8W
+  USBWakeUp_IRQn              = 42,      /* USB Device WakeUp from suspend through EXTI Line Interrupt */
+  USBHD_IRQn               		= 43,      /* USBHD global Interrupt                               */
+  USBHDWakeUp_IRQn            = 44,      /* USB Host/Device WakeUp Interrupt                     */
+  ETH_IRQn           					= 45,      /* ETH global Interrupt               									 */
+  ETHWakeUp_IRQn              = 46,      /* ETH WakeUp Interrupt                       					 */
+  BLEC_IRQn                   = 47,      /* BLEC global Interrupt                                */
+  BLES_IRQn                   = 48,      /* BLES global Interrupt                                */
+  TIM5_IRQn                   = 49,      /* TIM5 global Interrupt                                */
+  UART4_IRQn                  = 50,      /* UART4 global Interrupt                               */
+  DMA1_Channel8_IRQn          = 51,      /* DMA1 Channel 8 global Interrupt                      */
+  OSC32KCal_IRQn              = 52,      /* OSC32K global Interrupt                              */
+  OSCWakeUp_IRQn              = 53,      /* OSC32K WakeUp Interrupt                              */
+
+#endif  
 } IRQn_Type;
 
 
@@ -176,6 +254,7 @@ typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
 #define HSI_Value            HSI_VALUE 
 #define HSE_Value            HSE_VALUE
 #define HSEStartUp_TimeOut   HSE_STARTUP_TIMEOUT
+
 
 /* Analog to Digital Converter */
 typedef struct
@@ -347,7 +426,7 @@ typedef struct
   uint32_t  RESERVED4;
   __IO uint32_t FWR;
   uint32_t  RESERVED5[8];
-  CAN_FilterRegister_TypeDef sFilterRegister[14];
+  CAN_FilterRegister_TypeDef sFilterRegister[28];
 } CAN_TypeDef;
 
 /* CRC Calculation Unit */
@@ -462,27 +541,6 @@ typedef struct
   uint32_t  RESERVED0;
   __IO uint32_t ECCR2;
 } FSMC_Bank2_TypeDef;
-
-/* FSMC Bank3 Registers */ 
-typedef struct
-{
-  __IO uint32_t PCR3;
-  __IO uint32_t SR3;
-  __IO uint32_t PMEM3;
-  __IO uint32_t PATT3;
-  uint32_t  RESERVED0;
-  __IO uint32_t ECCR3;
-} FSMC_Bank3_TypeDef;
-
-/* FSMC Bank4 Registers */ 
-typedef struct
-{
-  __IO uint32_t PCR4;
-  __IO uint32_t SR4;
-  __IO uint32_t PMEM4;
-  __IO uint32_t PATT4;
-  __IO uint32_t PIO4;
-} FSMC_Bank4_TypeDef;
 
 /* General Purpose I/O */
 typedef struct
@@ -754,10 +812,19 @@ typedef struct
 /* USBHS Registers */
 typedef struct
 {
-  __IO uint32_t CONTROL;
-  __IO uint32_t FRAME_NO;
-  __IO uint32_t STATUS;
-  __IO uint32_t RX_LEN;
+  __IO uint8_t  CONTROL;
+  __IO uint8_t  HOST_CTRL;
+  __IO uint8_t  INT_EN;
+  __IO uint8_t  DEV_AD;
+  __IO uint16_t FRAME_NO;
+  __IO uint8_t  SUSPEND;
+  __IO uint8_t  RESERVED0;
+  __IO uint8_t  SPEED_TYPE;
+  __IO uint8_t  MIS_ST;
+  __IO uint8_t  INT_FG;
+  __IO uint8_t  INT_ST;
+  __IO uint16_t RX_LEN;
+  __IO uint16_t RESERVED1;
   __IO uint32_t ENDP_CONFIG;
   __IO uint32_t ENDP_TYPE;
   __IO uint32_t BUF_MODE;
@@ -792,39 +859,166 @@ typedef struct
   __IO uint32_t UEP13_TX_DMA;      
   __IO uint32_t UEP14_TX_DMA;     
   __IO uint32_t UEP15_TX_DMA;      
-  __IO uint32_t UEP0_MAX_LEN;     
-  __IO uint32_t UEP1_MAX_LEN;     
-  __IO uint32_t UEP2_MAX_LEN;     
-  __IO uint32_t UEP3_MAX_LEN;     
-  __IO uint32_t UEP4_MAX_LEN;     
-  __IO uint32_t UEP5_MAX_LEN;      
-  __IO uint32_t UEP6_MAX_LEN;      
-  __IO uint32_t UEP7_MAX_LEN;      
-  __IO uint32_t UEP8_MAX_LEN;      
-  __IO uint32_t UEP9_MAX_LEN;      
-  __IO uint32_t UEP10_MAX_LEN;     
-  __IO uint32_t UEP11_MAX_LEN;     
-  __IO uint32_t UEP12_MAX_LEN;     
-  __IO uint32_t UEP13_MAX_LEN;     
-  __IO uint32_t UEP14_MAX_LEN;     
-  __IO uint32_t UEP15_MAX_LEN;     
-  __IO uint32_t UEP0_CTRL;    
-  __IO uint32_t UEP1_CTRL;     
-  __IO uint32_t UEP2_CTRL;    
-  __IO uint32_t UEP3_CTRL;    
-  __IO uint32_t UEP4_CTRL;    
-  __IO uint32_t UEP5_CTRL;   
-  __IO uint32_t UEP6_CTRL;    
-  __IO uint32_t UEP7_CTRL;   
-  __IO uint32_t UEP8_CTRL;    
-  __IO uint32_t UEP9_CTRL;    
-  __IO uint32_t UEP10_CTRL;   
-  __IO uint32_t UEP11_CTRL;    
-  __IO uint32_t UEP12_CTRL;   
-  __IO uint32_t UEP13_CTRL;    
-  __IO uint32_t UEP14_CTRL;  
-  __IO uint32_t UEP15_CTRL;   
-} USBHS_TypeDef;
+  __IO uint16_t UEP0_MAX_LEN;
+  __IO uint16_t RESERVED2;
+  __IO uint16_t UEP1_MAX_LEN;
+  __IO uint16_t RESERVED3;
+  __IO uint16_t UEP2_MAX_LEN;
+  __IO uint16_t RESERVED4;
+  __IO uint16_t UEP3_MAX_LEN;
+  __IO uint16_t RESERVED5;
+  __IO uint16_t UEP4_MAX_LEN;
+  __IO uint16_t RESERVED6;
+  __IO uint16_t UEP5_MAX_LEN;
+  __IO uint16_t RESERVED7;
+  __IO uint16_t UEP6_MAX_LEN;
+  __IO uint16_t RESERVED8;
+  __IO uint16_t UEP7_MAX_LEN;
+  __IO uint16_t RESERVED9;
+  __IO uint16_t UEP8_MAX_LEN;
+  __IO uint16_t RESERVED10;
+  __IO uint16_t UEP9_MAX_LEN;
+  __IO uint16_t RESERVED11;
+  __IO uint16_t UEP10_MAX_LEN;
+  __IO uint16_t RESERVED12;
+  __IO uint16_t UEP11_MAX_LEN;
+  __IO uint16_t RESERVED13;
+  __IO uint16_t UEP12_MAX_LEN;
+  __IO uint16_t RESERVED14;
+  __IO uint16_t UEP13_MAX_LEN;
+  __IO uint16_t RESERVED15;
+  __IO uint16_t UEP14_MAX_LEN;
+  __IO uint16_t RESERVED16;
+  __IO uint16_t UEP15_MAX_LEN;
+  __IO uint16_t RESERVED17;
+  __IO uint16_t UEP0_TX_LEN;
+  __IO uint8_t  UEP0_TX_CTRL;
+  __IO uint8_t  UEP0_RX_CTRL;
+  __IO uint16_t UEP1_TX_LEN;
+  __IO uint8_t  UEP1_TX_CTRL;
+  __IO uint8_t  UEP1_RX_CTRL;
+  __IO uint16_t UEP2_TX_LEN;
+  __IO uint8_t  UEP2_TX_CTRL;
+  __IO uint8_t  UEP2_RX_CTRL;
+  __IO uint16_t UEP3_TX_LEN;
+  __IO uint8_t  UEP3_TX_CTRL;
+  __IO uint8_t  UEP3_RX_CTRL;
+  __IO uint16_t UEP4_TX_LEN;
+  __IO uint8_t  UEP4_TX_CTRL;
+  __IO uint8_t  UEP4_RX_CTRL;
+  __IO uint16_t UEP5_TX_LEN;
+  __IO uint8_t  UEP5_TX_CTRL;
+  __IO uint8_t  UEP5_RX_CTRL;
+  __IO uint16_t UEP6_TX_LEN;
+  __IO uint8_t  UEP6_TX_CTRL;
+  __IO uint8_t  UEP6_RX_CTRL;
+  __IO uint16_t UEP7_TX_LEN;
+  __IO uint8_t  UEP7_TX_CTRL;
+  __IO uint8_t  UEP7_RX_CTRL;
+  __IO uint16_t UEP8_TX_LEN;
+  __IO uint8_t  UEP8_TX_CTRL;
+  __IO uint8_t  UEP8_RX_CTRL;
+  __IO uint16_t UEP9_TX_LEN;
+  __IO uint8_t  UEP9_TX_CTRL;
+  __IO uint8_t  UEP9_RX_CTRL;
+  __IO uint16_t UEP10_TX_LEN;
+  __IO uint8_t  UEP10_TX_CTRL;
+  __IO uint8_t  UEP10_RX_CTRL;
+  __IO uint16_t UEP11_TX_LEN;
+  __IO uint8_t  UEP11_TX_CTRL;
+  __IO uint8_t  UEP11_RX_CTRL;
+  __IO uint16_t UEP12_TX_LEN;
+  __IO uint8_t  UEP12_TX_CTRL;
+  __IO uint8_t  UEP12_RX_CTRL;
+  __IO uint16_t UEP13_TX_LEN;
+  __IO uint8_t  UEP13_TX_CTRL;
+  __IO uint8_t  UEP13_RX_CTRL;
+  __IO uint16_t UEP14_TX_LEN;
+  __IO uint8_t  UEP14_TX_CTRL;
+  __IO uint8_t  UEP14_RX_CTRL;
+  __IO uint16_t UEP15_TX_LEN;
+  __IO uint8_t  UEP15_TX_CTRL;
+  __IO uint8_t  UEP15_RX_CTRL;
+} USBHSD_TypeDef;
+
+typedef struct  __attribute__((packed))
+{
+    __IO uint8_t  CONTROL;
+    __IO uint8_t  HOST_CTRL;
+    __IO uint8_t  INT_EN;
+    __IO uint8_t  DEV_AD;
+    __IO uint16_t FRAME_NO;
+    __IO uint8_t  SUSPEND;
+    __IO uint8_t  RESERVED0;
+    __IO uint8_t  SPEED_TYPE;
+    __IO uint8_t  MIS_ST;
+    __IO uint8_t  INT_FG;
+    __IO uint8_t  INT_ST;
+    __IO uint16_t RX_LEN;
+    __IO uint16_t RESERVED1;
+    __IO uint32_t HOST_EP_CONFIG;
+    __IO uint32_t HOST_EP_TYPE;
+    __IO uint32_t RESERVED2;
+    __IO uint32_t RESERVED3;
+    __IO uint32_t RESERVED4;
+    __IO uint32_t HOST_RX_DMA;
+    __IO uint32_t RESERVED5;
+    __IO uint32_t RESERVED6;
+    __IO uint32_t RESERVED7;
+    __IO uint32_t RESERVED8;
+    __IO uint32_t RESERVED9;
+    __IO uint32_t RESERVED10;
+    __IO uint32_t RESERVED11;
+    __IO uint32_t RESERVED12;
+    __IO uint32_t RESERVED13;
+    __IO uint32_t RESERVED14;
+    __IO uint32_t RESERVED15;
+    __IO uint32_t RESERVED16;
+    __IO uint32_t RESERVED17;
+    __IO uint32_t RESERVED18;
+    __IO uint32_t RESERVED19;
+    __IO uint32_t HOST_TX_DMA;
+    __IO uint32_t RESERVED20;
+    __IO uint32_t RESERVED21;
+    __IO uint32_t RESERVED22;
+    __IO uint32_t RESERVED23;
+    __IO uint32_t RESERVED24;
+    __IO uint32_t RESERVED25;
+    __IO uint32_t RESERVED26;
+    __IO uint32_t RESERVED27;
+    __IO uint32_t RESERVED28;
+    __IO uint32_t RESERVED29;
+    __IO uint32_t RESERVED30;
+    __IO uint32_t RESERVED31;
+    __IO uint32_t RESERVED32;
+    __IO uint32_t RESERVED33;
+    __IO uint16_t HOST_RX_MAX_LEN;
+    __IO uint16_t RESERVED34;
+    __IO uint32_t RESERVED35;
+    __IO uint32_t RESERVED36;
+    __IO uint32_t RESERVED37;
+    __IO uint32_t RESERVED38;
+    __IO uint32_t RESERVED39;
+    __IO uint32_t RESERVED40;
+    __IO uint32_t RESERVED41;
+    __IO uint32_t RESERVED42;
+    __IO uint32_t RESERVED43;
+    __IO uint32_t RESERVED44;
+    __IO uint32_t RESERVED45;
+    __IO uint32_t RESERVED46;
+    __IO uint32_t RESERVED47;
+    __IO uint32_t RESERVED48;
+    __IO uint32_t RESERVED49;
+    __IO uint8_t  HOST_EP_PID;
+    __IO uint8_t  RESERVED50;
+    __IO uint8_t  RESERVED51;
+    __IO uint8_t  HOST_RX_CTRL;
+    __IO uint16_t HOST_TX_LEN;
+    __IO uint8_t  HOST_TX_CTRL;
+    __IO uint8_t  RESERVED52;
+    __IO uint16_t HOST_SPLIT_DATA;
+} USBHSH_TypeDef;
+
 
 /* USBOTG_FS Registers */
 typedef struct
@@ -837,7 +1031,8 @@ typedef struct
    __IO uint8_t  MIS_ST;
    __IO uint8_t  INT_FG;
    __IO uint8_t  INT_ST;
-   __IO uint32_t RX_LEN;
+   __IO uint16_t RX_LEN;
+   __IO uint16_t Reserve1;
    __IO uint8_t  UEP4_1_MOD;
    __IO uint8_t  UEP2_3_MOD;
    __IO uint8_t  UEP5_6_MOD;
@@ -874,11 +1069,54 @@ typedef struct
    __IO uint16_t UEP7_TX_LEN;
    __IO uint8_t  UEP7_TX_CTRL;
    __IO uint8_t  UEP7_RX_CTRL;
-   __IO uint32_t Reserve1;
+   __IO uint32_t Reserve2;
    __IO uint32_t OTG_CR;
    __IO uint32_t OTG_SR;
 }USBOTG_FS_TypeDef;
 
+typedef struct  __attribute__((packed))
+{
+   __IO uint8_t   BASE_CTRL;
+   __IO uint8_t   HOST_CTRL;
+   __IO uint8_t   INT_EN;
+   __IO uint8_t   DEV_ADDR;
+   __IO uint8_t   Reserve0;
+   __IO uint8_t   MIS_ST;
+   __IO uint8_t   INT_FG;
+   __IO uint8_t   INT_ST;
+   __IO uint16_t  RX_LEN;
+   __IO uint16_t  Reserve1;
+   __IO uint8_t   Reserve2;
+   __IO uint8_t   HOST_EP_MOD;
+   __IO uint16_t  Reserve3;
+   __IO uint32_t  Reserve4;
+   __IO uint32_t  Reserve5;
+   __IO uint32_t  HOST_RX_DMA;
+   __IO uint32_t  HOST_TX_DMA;
+   __IO uint32_t  Reserve6;
+   __IO uint32_t  Reserve7;
+   __IO uint32_t  Reserve8;
+   __IO uint32_t  Reserve9;
+   __IO uint32_t  Reserve10;
+   __IO uint16_t  Reserve11;
+   __IO uint16_t  HOST_SETUP;
+   __IO uint8_t   HOST_EP_PID;
+   __IO uint8_t   Reserve12;
+   __IO uint8_t   Reserve13;
+   __IO uint8_t   HOST_RX_CTRL;
+   __IO uint16_t  HOST_TX_LEN;
+   __IO uint8_t   HOST_TX_CTRL;
+   __IO uint8_t   Reserve14;
+   __IO uint32_t  Reserve15;
+   __IO uint32_t  Reserve16;
+   __IO uint32_t  Reserve17;
+   __IO uint32_t  Reserve18;
+   __IO uint32_t  Reserve19;
+   __IO uint32_t  OTG_CR;
+   __IO uint32_t  OTG_SR;
+}USBOTGH_FS_TypeDef;
+
+#if defined (CH32F20x_D8C) 
 /* Ethernet MAC */
 typedef struct
 {
@@ -947,7 +1185,7 @@ typedef struct
   __IO uint32_t DMACHRBAR;
 } ETH_TypeDef;
 
-
+#endif
 
 /* Peripheral memory map */
 #define FLASH_BASE            ((uint32_t)0x08000000) /* FLASH base address in the alias region */
@@ -1022,6 +1260,7 @@ typedef struct
 #define DMA1_Channel5_BASE    (AHBPERIPH_BASE + 0x0058)
 #define DMA1_Channel6_BASE    (AHBPERIPH_BASE + 0x006C)
 #define DMA1_Channel7_BASE    (AHBPERIPH_BASE + 0x0080)
+#define DMA1_Channel8_BASE    (AHBPERIPH_BASE + 0x0094)
 #define DMA2_BASE             (AHBPERIPH_BASE + 0x0400)
 #define DMA2_Channel1_BASE    (AHBPERIPH_BASE + 0x0408)
 #define DMA2_Channel2_BASE    (AHBPERIPH_BASE + 0x041C)
@@ -1043,11 +1282,14 @@ typedef struct
 #define OPA_BASE              (AHBPERIPH_BASE + 0x3804)
 #define RNG_BASE              (AHBPERIPH_BASE + 0x3C00)
 
+#if defined (CH32F20x_D8C) 
 #define ETH_BASE              (AHBPERIPH_BASE + 0x8000)
 #define ETH_MAC_BASE          (ETH_BASE)
 #define ETH_MMC_BASE          (ETH_BASE + 0x0100)
 #define ETH_PTP_BASE          (ETH_BASE + 0x0700)
 #define ETH_DMA_BASE          (ETH_BASE + 0x1000)
+
+#endif
 
 #define USBFS_BASE            ((uint32_t)0x50000000)
 #define DVP_BASE              ((uint32_t)0x50050000)
@@ -1055,8 +1297,6 @@ typedef struct
 #define FSMC_Bank1_R_BASE     (FSMC_R_BASE + 0x0000) 
 #define FSMC_Bank1E_R_BASE    (FSMC_R_BASE + 0x0104) 
 #define FSMC_Bank2_R_BASE     (FSMC_R_BASE + 0x0060) 
-#define FSMC_Bank3_R_BASE     (FSMC_R_BASE + 0x0080) 
-#define FSMC_Bank4_R_BASE     (FSMC_R_BASE + 0x00A0) 
 
 #define DBGMCU_BASE           ((uint32_t)0xE0042000) /* Debug MCU registers base address */
 
@@ -1125,6 +1365,7 @@ typedef struct
 #define DMA1_Channel5       ((DMA_Channel_TypeDef *) DMA1_Channel5_BASE)
 #define DMA1_Channel6       ((DMA_Channel_TypeDef *) DMA1_Channel6_BASE)
 #define DMA1_Channel7       ((DMA_Channel_TypeDef *) DMA1_Channel7_BASE)
+#define DMA1_Channel8       ((DMA_Channel_TypeDef *) DMA1_Channel8_BASE)
 #define DMA2_Channel1       ((DMA_Channel_TypeDef *) DMA2_Channel1_BASE)
 #define DMA2_Channel2       ((DMA_Channel_TypeDef *) DMA2_Channel2_BASE)
 #define DMA2_Channel3       ((DMA_Channel_TypeDef *) DMA2_Channel3_BASE)
@@ -1139,8 +1380,10 @@ typedef struct
 #define RCC                 ((RCC_TypeDef *) RCC_BASE)
 #define FLASH               ((FLASH_TypeDef *) FLASH_R_BASE)
 #define CRC                 ((CRC_TypeDef *) CRC_BASE)
-#define USBHS               ((USBHS_TypeDef *) USBHS_BASE)
-#define USBOTG_FS           ((USBOTG_FS_TypeDef *) USBFS_BASE)
+#define USBHSD              ((USBHSD_TypeDef *) USBHS_BASE)
+#define USBHSH              ((USBHSH_TypeDef *) USBHS_BASE)
+#define USBOTG_FS           ((USBOTG_FS_TypeDef *)USBFS_BASE)
+#define USBOTG_H_FS         ((USBOTGH_FS_TypeDef *)USBFS_BASE)
 #define EXTEN               ((EXTEN_TypeDef *) EXTEN_BASE)
 #define OPA                 ((OPA_TypeDef *) OPA_BASE)
 #define RNG                 ((RNG_TypeDef *) RNG_BASE)
@@ -1151,8 +1394,6 @@ typedef struct
 #define FSMC_Bank1          ((FSMC_Bank1_TypeDef *) FSMC_Bank1_R_BASE)
 #define FSMC_Bank1E         ((FSMC_Bank1E_TypeDef *) FSMC_Bank1E_R_BASE)
 #define FSMC_Bank2          ((FSMC_Bank2_TypeDef *) FSMC_Bank2_R_BASE)
-#define FSMC_Bank3          ((FSMC_Bank3_TypeDef *) FSMC_Bank3_R_BASE)
-#define FSMC_Bank4          ((FSMC_Bank4_TypeDef *) FSMC_Bank4_R_BASE)
 
 #define DBGMCU              ((DBGMCU_TypeDef *) DBGMCU_BASE)
 
@@ -3458,14 +3699,6 @@ typedef struct
 
 
 /*******************  Bit definition for FLASH_ACTLR register  ******************/
-#define  FLASH_ACTLR_LATENCY                   ((uint8_t)0x03)               /* LATENCY[2:0] bits (Latency) */
-#define  FLASH_ACTLR_LATENCY_0                 ((uint8_t)0x00)               /* Bit 0 */
-#define  FLASH_ACTLR_LATENCY_1                 ((uint8_t)0x01)               /* Bit 0 */
-#define  FLASH_ACTLR_LATENCY_2                 ((uint8_t)0x02)               /* Bit 1 */
-
-#define  FLASH_ACTLR_HLFCYA                    ((uint8_t)0x08)               /* Flash Half Cycle Access Enable */
-#define  FLASH_ACTLR_PRFTBE                    ((uint8_t)0x10)               /* Prefetch Buffer Enable */
-#define  FLASH_ACTLR_PRFTBS                    ((uint8_t)0x20)               /* Prefetch Buffer Status */
 
 /******************  Bit definition for FLASH_KEYR register  ******************/
 #define  FLASH_KEYR_FKEYR                      ((uint32_t)0xFFFFFFFF)        /* FPEC Key */

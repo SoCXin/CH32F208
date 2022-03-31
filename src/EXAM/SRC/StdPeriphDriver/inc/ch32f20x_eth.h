@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for the
 *                      ETH firmware library.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #ifndef __CH32F20x_ETH_H
 #define __CH32F20x_ETH_H
@@ -1204,6 +1206,8 @@ Wake-UpFrame Filter Re7 : Filter3 CRC16 - Filter2 CRC16 */
 #define  ETH_ERROR              ((uint32_t)0)
 #define  ETH_SUCCESS            ((uint32_t)1)
 
+extern ETH_DMADESCTypeDef  *DMATxDescToSet;
+extern ETH_DMADESCTypeDef  *DMARxDescToGet;
 
 void ETH_DeInit(void);
 void ETH_StructInit(ETH_InitTypeDef* ETH_InitStruct);

@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Main program body.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
 /*
@@ -17,18 +19,21 @@
 
 #include "debug.h"
 
-/*******************************************************************************
-* Function Name  : ExtTrigger_Start_Two_TIM
-* Description    : Starting 2 timers synchronously in response to an external trigger.
-* Input          : arr: the period value.
-*                  psc: the prescaler value.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      ExtTrigger_Start_Two_TIM
+ *
+ * @brief   Starting 2 timers synchronously in response to an external trigger.
+ *
+ * @param   arr - the period value.
+ *          psc - the prescaler value.
+ *
+ * @return  none
+ */
 void ExtTrigger_Start_Two_TIM( u16 arr, u16 psc )
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
-	TIM_ICInitTypeDef TIM_ICInitStructure;
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+	GPIO_InitTypeDef GPIO_InitStructure={0};
+	TIM_ICInitTypeDef TIM_ICInitStructure={0};
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure={0};
 
 	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA | RCC_APB2Periph_TIM1, ENABLE );
 	RCC_APB1PeriphClockCmd( RCC_APB1Periph_TIM2, ENABLE );
@@ -61,14 +66,16 @@ void ExtTrigger_Start_Two_TIM( u16 arr, u16 psc )
 	TIM_SelectSlaveMode( TIM2, TIM_SlaveMode_Trigger );
 }
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {
+	Delay_Init();
 	USART_Printf_Init(115200);
 	printf("SystemClk:%d\r\n",SystemCoreClock);
 

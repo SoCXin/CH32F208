@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for the 
 *                      DMA firmware library.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/  
 #ifndef __CH32F20x_DMA_H
 #define __CH32F20x_DMA_H
@@ -123,6 +125,15 @@ typedef struct
 #define DMA1_IT_HT7                        ((uint32_t)0x04000000)
 #define DMA1_IT_TE7                        ((uint32_t)0x08000000)
 
+#if defined (CH32F20x_D8W) || defined (CH32F20x_D6)
+#define DMA1_IT_GL8                        ((uint32_t)0x10000000)
+#define DMA1_IT_TC8                        ((uint32_t)0x20000000)
+#define DMA1_IT_HT8                        ((uint32_t)0x40000000)
+#define DMA1_IT_TE8                        ((uint32_t)0x80000000)
+
+#endif
+
+#if defined (CH32F20x_D8) || defined (CH32F20x_D8C)
 #define DMA2_IT_GL1                        ((uint32_t)0x10000001)
 #define DMA2_IT_TC1                        ((uint32_t)0x10000002)
 #define DMA2_IT_HT1                        ((uint32_t)0x10000004)
@@ -169,6 +180,8 @@ typedef struct
 #define DMA2_IT_HT11                       ((uint32_t)0x20004000)
 #define DMA2_IT_TE11                       ((uint32_t)0x20008000)
 
+#endif
+
 /* DMA_flags_definition */
 #define DMA1_FLAG_GL1                      ((uint32_t)0x00000001)
 #define DMA1_FLAG_TC1                      ((uint32_t)0x00000002)
@@ -199,6 +212,15 @@ typedef struct
 #define DMA1_FLAG_HT7                      ((uint32_t)0x04000000)
 #define DMA1_FLAG_TE7                      ((uint32_t)0x08000000)
 
+#if defined (CH32F20x_D8W) || defined (CH32F20x_D6)
+#define DMA1_FLAG_GL8                      ((uint32_t)0x10000000)
+#define DMA1_FLAG_TC8                      ((uint32_t)0x20000000)
+#define DMA1_FLAG_HT8                      ((uint32_t)0x40000000)
+#define DMA1_FLAG_TE8                      ((uint32_t)0x80000000)
+
+#endif
+
+#if defined (CH32F20x_D8) || defined (CH32F20x_D8C)
 #define DMA2_FLAG_GL1                      ((uint32_t)0x10000001)
 #define DMA2_FLAG_TC1                      ((uint32_t)0x10000002)
 #define DMA2_FLAG_HT1                      ((uint32_t)0x10000004)
@@ -244,6 +266,8 @@ typedef struct
 #define DMA2_FLAG_TC11                     ((uint32_t)0x20002000)
 #define DMA2_FLAG_HT11                     ((uint32_t)0x20004000)
 #define DMA2_FLAG_TE11                     ((uint32_t)0x20008000)
+
+#endif
 
 
 void DMA_DeInit(DMA_Channel_TypeDef* DMAy_Channelx);

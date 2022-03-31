@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Endpoint routines
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #include "usb_lib.h"
 #include "usb_desc.h"
@@ -20,12 +22,13 @@ uint8_t USB_Rx_Buffer[USBD_DATA_SIZE];
 u16 USB_Rx_Cnt=0; 
 
 
-/*******************************************************************************
-* Function Name  : EP2_IN_Callback
-* Description    : Endpoint 2 IN.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      EP2_IN_Callback
+ *
+ * @brief  Endpoint 2 IN.
+ *
+ * @return  none
+ */
 void EP2_IN_Callback (void)
 { 
 	UserToPMABufferCopy(USB_Rx_Buffer, ENDP2_TXADDR, USB_Rx_Cnt);
@@ -33,12 +36,13 @@ void EP2_IN_Callback (void)
 	SetEPTxValid(ENDP2);   
 }
 
-/*******************************************************************************
-* Function Name  : EP2_OUT_Callback
-* Description    : Endpoint 2 IN.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      EP2_OUT_Callback
+ *
+ * @brief  Endpoint 2 IN.
+ *
+ * @return  none
+ */
 void EP2_OUT_Callback(void)
 {
 	uint8_t i; 
@@ -54,12 +58,13 @@ void EP2_OUT_Callback(void)
 	SetEPRxValid(ENDP2);													
 }
 
-/*******************************************************************************
-* Function Name  : SOF_Callback
-* Description    : SOF call back.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      SOF_Callback
+ *
+ * @brief  SOF call back.
+ *
+ * @return  none
+ */
 void SOF_Callback(void)
 {
 	static uint32_t FrameCount = 0;

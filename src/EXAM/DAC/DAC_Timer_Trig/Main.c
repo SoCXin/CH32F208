@@ -4,13 +4,15 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Main program body.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
 /*
  *@Note
  定时器触发DAC转换例程：
  DAC通道0(PA4)输出
- 通过TIM3_TRGO事件触发1次DAC转换，PA4输出相应的电压。
+ 通过TIM8_TRGO事件触发1次DAC转换，PA4输出相应的电压。
 
 */
 
@@ -19,114 +21,105 @@
 /* Global define */
 #define Num 7
 
-/* Global Variable */ 
-u16 DAC_Value[Num]={64,128,256,512,1024,2048,4095};   
+/* Global Variable */
+u16 DAC_Value[Num] = {64, 128, 256, 512, 1024, 2048, 4095};
 
 
-/*******************************************************************************
-* Function Name  : Dac_Init
-* Description    : Initializes DAC collection.
-* Input          : None
-* Return         : None
-*******************************************************************************/ 
-void Dac_Init(void)
+/*********************************************************************
+ * @fn      Dac_Init
+ *
+ * @brief   Initializes DAC collection.
+ *
+ * @return  none
+ */
+void Dac_Init( void )
 {
+    GPIO_InitTypeDef GPIO_InitStructure = {0};
+    DAC_InitTypeDef DAC_InitType = {0};
 
-	
-	GPIO_InitTypeDef GPIO_InitStructure;
-	DAC_InitTypeDef DAC_InitType;
-	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE );
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE );
-	
-	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;				          
- 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN; 		     
- 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
- 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	GPIO_SetBits(GPIOA,GPIO_Pin_4);
-	
-	DAC_InitType.DAC_Trigger=DAC_Trigger_T3_TRGO;	                         
-	DAC_InitType.DAC_WaveGeneration=DAC_WaveGeneration_None;             
-	DAC_InitType.DAC_OutputBuffer=DAC_OutputBuffer_Disable ;	         
-  DAC_Init(DAC_Channel_1,&DAC_InitType);
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );
+    RCC_APB1PeriphClockCmd( RCC_APB1Periph_DAC, ENABLE );
 
-	DAC_Cmd(DAC_Channel_1, ENABLE); 
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init( GPIOA, &GPIO_InitStructure );
+    GPIO_SetBits( GPIOA, GPIO_Pin_4 );
+
+    DAC_InitType.DAC_Trigger = DAC_Trigger_T8_TRGO;
+    DAC_InitType.DAC_WaveGeneration = DAC_WaveGeneration_None;
+    DAC_InitType.DAC_OutputBuffer = DAC_OutputBuffer_Disable ;
+    DAC_Init( DAC_Channel_1, &DAC_InitType );
+
+    DAC_Cmd( DAC_Channel_1, ENABLE );
 
 }
 
-
-/*******************************************************************************
-* Function Name  : TIM3_Init
-* Description    : Initializes TIM collection.
-* Input          : None
-* Return         : None
-*******************************************************************************/
-void TIM3_Init(u16 arr,u16 psc)
+/*********************************************************************
+ * @fn      TIM8_Init
+ *
+ * @brief   Initializes TIM3 collection.
+ *
+ * @param   arr - TIM_Period
+ *          psc - TIM_Prescaler
+ *
+ * @return  none
+ */
+void TIM8_Init( u16 arr, u16 psc )
 {
-	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); 
-	
-	TIM_TimeBaseStructure.TIM_Period = arr;                        	
-	TIM_TimeBaseStructure.TIM_Prescaler =psc;                      
-	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;        
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;    
-	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure); 
- 	
-  TIM_SelectOutputTrigger(TIM3, TIM_TRGOSource_Update);        /* Enable TRGO */  
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure = {0};
 
-	TIM_Cmd(TIM3, ENABLE);  				 
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_TIM8, ENABLE );
+
+    TIM_TimeBaseInitStructure.TIM_Period = arr;
+    TIM_TimeBaseInitStructure.TIM_Prescaler = psc;
+    TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Down;
+    TIM_TimeBaseInitStructure.TIM_RepetitionCounter =  0x00;
+    TIM_TimeBaseInit( TIM8, &TIM_TimeBaseInitStructure );
+
+    TIM_SelectOutputTrigger( TIM8, TIM_TRGOSource_Update );
+    TIM_Cmd( TIM8, ENABLE );
 }
 
-
-
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
-int main(void)
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
+int main( void )
 {
-	u8 i=0;
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-  Delay_Init();
-	USART_Printf_Init(115200);
-	
-	printf("SystemClk:%d\r\n",SystemCoreClock);
-	printf("Timer Trig\r\n");
-  
+    u8 i = 0;
+    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_2 );
+    Delay_Init();
+    USART_Printf_Init( 115200 );
 
-  TIM3_Init(9999,7199);
-	Dac_Init();
-	
-	while(1)
-  {	
-	  DAC->R12BDHR1=DAC_Value[i];
-		i++;
-		if(i>Num)
-		{
-		  i=0;
-		}
-	  Delay_Ms(1000);
-		
-	 // TIM_GenerateEvent(TIM3,TIM_EventSource_Update);	
-		printf("run\r\n");
-		printf("DAC->R12BDHR1:0x%04x\r\n",DAC->R12BDHR1);
-		printf("DAC->DOR1:0x%04x\r\n",DAC->DOR1);
-		printf("TIM3->CNT:%d\r\n",TIM3->CNT);
-		
-	}
+    printf( "SystemClk:%d\r\n", SystemCoreClock );
+    printf( "Timer Trig\r\n" );
+
+    TIM8_Init( 0x7, 48000 - 1 );
+    Dac_Init();
+
+    while( 1 )
+    {
+        DAC->R12BDHR1 = DAC_Value[i];
+        i++;
+
+        if( i > Num )
+        {
+            i = 0;
+        }
+
+        Delay_Ms( 1000 );
+        printf( "run\r\n" );
+        printf( "DAC->R12BDHR1:0x%04x\r\n", DAC->R12BDHR1 );
+        printf( "DAC->DOR1:0x%04x\r\n", DAC->DOR1 );
+        printf( "TIM3->CNT:%d\r\n", TIM3->CNT );
+
+    }
 }
-
-
-
-
-
-
-
-
 
 
 

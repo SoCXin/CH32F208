@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2020/04/30
 * Description        : Main program body.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
 /*
@@ -29,33 +31,34 @@
 /* Global Variable */
 #define  Len    10
 
-u16 I2S2_Tx[Len] = { 0x1111, 0x2222, 0x3333, 0x4444, 0x5555, 0x6666, 0x7777, 0x88888, 0x9999, 0xAAAA };
+u16 I2S2_Tx[Len] = { 0x1111, 0x2222, 0x3333, 0x4444, 0x5555, 0x6666, 0x7777, 0x8888, 0x9999, 0xAAAA };
 u16 I2S3_Rx[Len];
 
 
-/*******************************************************************************
-* Function Name  : I2S2_Init
-* Description    : Init I2S2
-* Input          : None
-* Return         : None
-*******************************************************************************/
-void I2S2_Init(void)
+/*********************************************************************
+ * @fn      I2S2_Init
+ *
+ * @brief   Init I2S2
+ *
+ * @return  none
+ */
+void I2S2_Init( void )
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    I2S_InitTypeDef  I2S_InitStructure;
+    GPIO_InitTypeDef GPIO_InitStructure = {0};
+    I2S_InitTypeDef  I2S_InitStructure = {0};
 
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
+    RCC_APB1PeriphClockCmd( RCC_APB1Periph_SPI2, ENABLE );
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE );
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_15;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    GPIO_Init( GPIOB, &GPIO_InitStructure );
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
+    GPIO_Init( GPIOC, &GPIO_InitStructure );
 
     I2S_InitStructure.I2S_Mode = I2S_Mode_MasterTx;
     I2S_InitStructure.I2S_Standard = I2S_Standard_Phillips;
@@ -63,35 +66,36 @@ void I2S2_Init(void)
     I2S_InitStructure.I2S_MCLKOutput = I2S_MCLKOutput_Disable;
     I2S_InitStructure.I2S_AudioFreq = I2S_AudioFreq_48k;
     I2S_InitStructure.I2S_CPOL = I2S_CPOL_High;
-    I2S_Init(SPI2, &I2S_InitStructure);
+    I2S_Init( SPI2, &I2S_InitStructure );
 
     SPI_I2S_DMACmd( SPI2, SPI_I2S_DMAReq_Tx, ENABLE );
-    I2S_Cmd(SPI2, ENABLE);
+    I2S_Cmd( SPI2, ENABLE );
 }
 
-/*******************************************************************************
-* Function Name  : I2S3_Init
-* Description    : Init I2S3
-* Input          : None
-* Return         : None
-*******************************************************************************/
-void I2S3_Init(void)
+/*********************************************************************
+ * @fn      I2S3_Init
+ *
+ * @brief   Init I2S2
+ *
+ * @return  none
+ */
+void I2S3_Init( void )
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    I2S_InitTypeDef  I2S_InitStructure;
+    GPIO_InitTypeDef GPIO_InitStructure = {0};
+    I2S_InitTypeDef  I2S_InitStructure = {0};
 
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
+    RCC_APB1PeriphClockCmd( RCC_APB1Periph_SPI3, ENABLE );
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE );
 
     GPIO_PinRemapConfig( GPIO_Remap_SWJ_JTAGDisable, ENABLE );
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_Init( GPIOA, &GPIO_InitStructure );
 
-    GPIO_InitStructure.GPIO_Pin =GPIO_Pin_3 | GPIO_Pin_5;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_5;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    GPIO_Init( GPIOB, &GPIO_InitStructure );
 
     I2S_InitStructure.I2S_Mode = I2S_Mode_SlaveRx;
     I2S_InitStructure.I2S_Standard = I2S_Standard_Phillips;
@@ -99,30 +103,32 @@ void I2S3_Init(void)
     I2S_InitStructure.I2S_MCLKOutput = I2S_MCLKOutput_Disable;
     I2S_InitStructure.I2S_AudioFreq = I2S_AudioFreq_48k;
     I2S_InitStructure.I2S_CPOL = I2S_CPOL_High;
-    I2S_Init(SPI3, &I2S_InitStructure);
+    I2S_Init( SPI3, &I2S_InitStructure );
 
     SPI_I2S_DMACmd( SPI3, SPI_I2S_DMAReq_Rx, ENABLE );
-    I2S_Cmd(SPI3, ENABLE);
+    I2S_Cmd( SPI3, ENABLE );
 }
 
 
-/*******************************************************************************
-* Function Name  : DMA_Tx_Init
-* Description    : Initializes the I2S2 DMA Channelx configuration.
-* Input          : DMA_CHx:
-*                    x can be 1 to 7.
-*                  ppadr: Peripheral base address.
-*                  memadr: Memory base address.
-*                  bufsize: DMA channel buffer size.
-* Return         : None
-*******************************************************************************/
-void DMA_Tx_Init( DMA_Channel_TypeDef* DMA_CHx, u32 ppadr, u32 memadr, u16 bufsize)
+/*********************************************************************
+ * @fn      DMA_Tx_Init
+ *
+ * @brief   Initializes the DMAy Channelx configuration.
+ *
+ * @param   DMA_CHx - x can be 1 to 7.
+ *          ppadr - Peripheral base address.
+ *          memadr - Memory base address.
+ *          bufsize - DMA channel buffer size.
+ *
+ * @return  none
+ */
+void DMA_Tx_Init( DMA_Channel_TypeDef *DMA_CHx, u32 ppadr, u32 memadr, u16 bufsize )
 {
-    DMA_InitTypeDef DMA_InitStructure;
+    DMA_InitTypeDef DMA_InitStructure = {0};
 
     RCC_AHBPeriphClockCmd( RCC_AHBPeriph_DMA1, ENABLE );
 
-    DMA_DeInit(DMA_CHx);
+    DMA_DeInit( DMA_CHx );
 
     DMA_InitStructure.DMA_PeripheralBaseAddr = ppadr;
     DMA_InitStructure.DMA_MemoryBaseAddr = memadr;
@@ -138,23 +144,25 @@ void DMA_Tx_Init( DMA_Channel_TypeDef* DMA_CHx, u32 ppadr, u32 memadr, u16 bufsi
     DMA_Init( DMA_CHx, &DMA_InitStructure );
 }
 
-/*******************************************************************************
-* Function Name  : DMA_Rx_Init
-* Description    : Initializes the I2S3 DMA Channelx configuration.
-* Input          : DMA_CHx:
-*                    x can be 1 to 7.
-*                  ppadr; Peripheral base address.
-*                  memadr: Memory base address.
-*                  bufsize: DMA channel buffer size.
-* Return         : None
-*******************************************************************************/
-void DMA_Rx_Init( DMA_Channel_TypeDef* DMA_CHx, u32 ppadr, u32 memadr, u16 bufsize )
+/*********************************************************************
+ * @fn      DMA_Rx_Init
+ *
+ * @brief   Initializes the I2S3 DMA Channelx configuration.
+ *
+ * @param   DMA_CHx - x can be 1 to 7.
+ *          ppadr - Peripheral base address.
+ *          memadr - Memory base address.
+ *          bufsize - DMA channel buffer size.
+ *
+ * @return  none
+ */
+void DMA_Rx_Init( DMA_Channel_TypeDef *DMA_CHx, u32 ppadr, u32 memadr, u16 bufsize )
 {
-    DMA_InitTypeDef DMA_InitStructure;
+    DMA_InitTypeDef DMA_InitStructure = {0};
 
     RCC_AHBPeriphClockCmd( RCC_AHBPeriph_DMA2, ENABLE );
 
-    DMA_DeInit(DMA_CHx);
+    DMA_DeInit( DMA_CHx );
 
     DMA_InitStructure.DMA_PeripheralBaseAddr = ppadr;
     DMA_InitStructure.DMA_MemoryBaseAddr = memadr;
@@ -170,45 +178,46 @@ void DMA_Rx_Init( DMA_Channel_TypeDef* DMA_CHx, u32 ppadr, u32 memadr, u16 bufsi
     DMA_Init( DMA_CHx, &DMA_InitStructure );
 }
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
-int main(void)
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
+int main( void )
 {
     u32 i;
 
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
     Delay_Init();
-    USART_Printf_Init(921600);
-    printf("SystemClk:%d\r\n",SystemCoreClock);
+    USART_Printf_Init( 921600 );
+    printf( "SystemClk:%d\r\n", SystemCoreClock );
 
-    SPI_I2S_DeInit(SPI2);
-    SPI_I2S_DeInit(SPI3);
+    SPI_I2S_DeInit( SPI2 );
+    SPI_I2S_DeInit( SPI3 );
 
     I2S2_Init();
     I2S3_Init();
 
-    DMA_Rx_Init( DMA2_Channel1, (u32)&SPI3->DATAR, (u32)I2S3_Rx, Len );;
-    DMA_Tx_Init( DMA1_Channel5, (u32)&SPI2->DATAR, (u32)I2S2_Tx, Len );
+    DMA_Rx_Init( DMA2_Channel1, ( u32 )&SPI3->DATAR, ( u32 )I2S3_Rx, Len );;
+    DMA_Tx_Init( DMA1_Channel5, ( u32 )&SPI2->DATAR, ( u32 )I2S2_Tx, Len );
 
     DMA_Cmd( DMA2_Channel1, ENABLE );
     DMA_Cmd( DMA1_Channel5, ENABLE );
 
-    while( (!DMA_GetFlagStatus(DMA1_FLAG_TC5))){};
-    while( (!DMA_GetFlagStatus(DMA2_FLAG_TC1))){};
+    while( ( !DMA_GetFlagStatus( DMA1_FLAG_TC5 ) ) ) {};
+    while( ( !DMA_GetFlagStatus( DMA2_FLAG_TC1 ) ) ) {};
 
-    I2S_Cmd(SPI3, DISABLE);
-    I2S_Cmd(SPI2, DISABLE);
+    I2S_Cmd( SPI3, DISABLE );
+    I2S_Cmd( SPI2, DISABLE );
 
-    printf("Rx data:\r\n");
-    for(i=0; i<Len; i++){
-        printf("%08x %08x\r\n", I2S2_Tx[i], I2S3_Rx[i]);
+    printf( "Rx data:\r\n" );
+    for( i = 0; i < Len; i++ ){
+        printf( "%08x %08x\r\n", I2S2_Tx[i], I2S3_Rx[i] );
     }
 
-    while(1);
+    while( 1 );
 }
 
 

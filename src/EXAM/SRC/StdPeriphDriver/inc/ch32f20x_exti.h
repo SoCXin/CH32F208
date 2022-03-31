@@ -5,6 +5,8 @@
 * Date               : 2021/08/08
 * Description        : This file contains all the functions prototypes for the 
 *                      EXTI firmware library.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #ifndef __CH32F20x_EXTI_H
 #define __CH32F20x_EXTI_H
@@ -66,10 +68,27 @@ typedef struct
 #define EXTI_Line15      ((uint32_t)0x08000)  /* External interrupt line 15 */
 #define EXTI_Line16      ((uint32_t)0x10000)  /* External interrupt line 16 Connected to the PVD Output */
 #define EXTI_Line17      ((uint32_t)0x20000)  /* External interrupt line 17 Connected to the RTC Alarm event */
-#define EXTI_Line18      ((uint32_t)0x40000)  /* External interrupt line 18 Connected to the USB Device/USB OTG FS
+
+#define EXTI_Line18      ((uint32_t)0x40000)  /* External interrupt line 18 Connected to 
+                                                 the USBD/USBFS OTG —— CH32F20x_D8C/CH32F20x_D8
+                                                 the USBD —— CH32F20x_D6/CH32F20x_D8W
                                                  Wakeup from suspend event */                                    
+#define EXTI_Line20      ((uint32_t)0x100000) /* External interrupt line 20 Connected to 
+                                                 the USBHS —— CH32F20x_D8C/CH32F20x_D8
+                                                 the USBFS —— CH32F20x_D6/CH32F20x_D8W
+                                                 Wakeup event */
+
+#if defined (CH32F20x_D8) || defined (CH32F20x_D8C) || defined (CH32F20x_D8W)
 #define EXTI_Line19      ((uint32_t)0x80000)  /* External interrupt line 19 Connected to the Ethernet Wakeup event */
-#define EXTI_Line20      ((uint32_t)0x100000) /* External interrupt line 20 Connected to the USBHD Wakeup event */
+
+#endif
+
+#ifdef CH32F20x_D8W
+#define EXTI_Line21      ((uint32_t)0x200000) /* External interrupt line 21 Connected to the OSC32K Wakeup event */
+
+#endif
+
+
 
 void EXTI_DeInit(void);
 void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct);

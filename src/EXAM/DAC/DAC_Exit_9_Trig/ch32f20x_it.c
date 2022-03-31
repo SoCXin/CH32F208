@@ -4,16 +4,19 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Main Interrupt Service Routines.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #include "ch32f20x_it.h"
 
 
-/*******************************************************************************
-* Function Name  : NMI_Handler
-* Description    : This function handles NMI exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      NMI_Handler
+ *
+ * @brief   This function handles NMI exception.
+ *
+ * @return  none
+ */
 void NMI_Handler(void)
 {
   while (1)
@@ -21,12 +24,13 @@ void NMI_Handler(void)
   }	
 }
 
-/*******************************************************************************
-* Function Name  : HardFault_Handler
-* Description    : This function handles Hard Fault exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      HardFault_Handler
+ *
+ * @brief   This function handles Hard Fault exception.
+ *
+ * @return  none
+ */
 void HardFault_Handler(void)
 {
   while (1)
@@ -34,12 +38,13 @@ void HardFault_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : MemManage_Handler
-* Description    : This function handles Memory Manage exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      MemManage_Handler
+ *
+ * @brief   This function handles Memory Manage exception.
+ *
+ * @return  none
+ */
 void MemManage_Handler(void)
 {
   while (1)
@@ -47,12 +52,13 @@ void MemManage_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : BusFault_Handler
-* Description    : This function handles Bus Fault exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      BusFault_Handler
+ *
+ * @brief   This function handles Bus Fault exception.
+ *
+ * @return  none
+ */
 void BusFault_Handler(void)
 {
   while (1)
@@ -60,12 +66,13 @@ void BusFault_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : UsageFault_Handler
-* Description    : This function handles Usage Fault exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      UsageFault_Handler
+ *
+ * @brief   This function handles Usage Fault exception.
+ *
+ * @return  none
+ */
 void UsageFault_Handler(void)
 {
   while (1)
@@ -73,12 +80,13 @@ void UsageFault_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : SVC_Handler
-* Description    : This function handles SVCall exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      SVC_Handler
+ *
+ * @brief   This function handles SVCall exception.
+ *
+ * @return  none
+ */
 void SVC_Handler(void)
 {
   while (1)
@@ -86,12 +94,13 @@ void SVC_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : DebugMon_Handler
-* Description    : This function handles Debug Monitor exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DebugMon_Handler
+ *
+ * @brief   This function handles Debug Monitor exception.
+ *
+ * @return  none
+ */
 void DebugMon_Handler(void)
 {
   while (1)
@@ -99,12 +108,13 @@ void DebugMon_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : PendSV_Handler
-* Description    : This function handles PendSVC exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      PendSV_Handler
+ *
+ * @brief   This function handles PendSVC exception.
+ *
+ * @return  none
+ */
 void PendSV_Handler(void)
 {
   while (1)
@@ -112,12 +122,13 @@ void PendSV_Handler(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : SysTick_Handler
-* Description    : This function handles SysTick Handler.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      SysTick_Handler
+ *
+ * @brief   This function handles SysTick Handler.
+ *
+ * @return  none
+ */
 void SysTick_Handler(void)
 {
   while (1)

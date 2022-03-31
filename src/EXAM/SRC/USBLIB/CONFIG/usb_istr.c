@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : ISTR events interrupt service routines
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #include "usb_lib.h"
 #include "usb_prop.h"
@@ -37,12 +39,13 @@ void (*pEpInt_OUT[7])(void) ={
 	EP7_OUT_Callback,
 };
 
-/*******************************************************************************
-* Function Name  : USB_Istr
-* Description    : ISTR events interrupt service routine
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_Istr
+ *
+ * @brief   ISTR events interrupt service routine
+ *
+ * @return  none
+ */
 void USB_Istr(void)
 {
     uint32_t i=0;

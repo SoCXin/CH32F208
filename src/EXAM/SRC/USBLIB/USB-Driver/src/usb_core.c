@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Standard protocol processing (USB v2.0)
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/ 
 #include "usb_lib.h"
 
@@ -33,13 +35,16 @@ static void DataStageIn(void);
 static void NoData_Setup0(void);
 static void Data_Setup0(void);
 
-/*******************************************************************************
-* Function Name  : Standard_GetConfiguration.
-* Description    : Return the current configuration variable address.
-* Input          : Length: How many bytes are needed.
-* Return         : Return 1: if the request is invalid when "Length" is 0.
-*                  Return "Buffer" if the "Length" is not 0.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_GetConfiguration.
+ *
+ * @brief   Return the current configuration variable address.
+ *
+ * @param   Length - How many bytes are needed.
+ *
+ * @return  Return 1 - if the request is invalid when "Length" is 0.
+ *           Return "Buffer" if the "Length" is not 0.
+ */	
 uint8_t *Standard_GetConfiguration(uint16_t Length)
 {
   if (Length == 0)
@@ -52,14 +57,15 @@ uint8_t *Standard_GetConfiguration(uint16_t Length)
   return (uint8_t *)&pInformation->Current_Configuration;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_SetConfiguration.
-* Description    : This routine is called to set the configuration value
-*                  Then each class should configure device itself.
-* Input          : None.
-* Return         : Return USB_SUCCESS: if the request is performed.
-*                  Return USB_UNSUPPORT: if the request is invalid.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_SetConfiguration.
+ *
+ * @brief   This routine is called to set the configuration value
+ *          Then each class should configure device itself.
+ *
+ * @return  Return USB_SUCCESS - if the request is performed.
+ *           Return USB_UNSUPPORT - if the request is invalid.
+ */
 RESULT Standard_SetConfiguration(void)
 {
   if ((pInformation->USBwValue0 <=
@@ -76,13 +82,16 @@ RESULT Standard_SetConfiguration(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : Standard_GetInterface.
-* Description    : Return the Alternate Setting of the current interface.
-* Input          : Length: How many bytes are needed.
-* Return         : Return 0: if the request is invalid when "Length" is 0.
-*                  Return "Buffer" if the "Length" is not 0.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_GetInterface.
+ *
+ * @brief   Return the Alternate Setting of the current interface.
+ *
+ * @param   Length - How many bytes are needed.
+ *
+ * @return  Return 1 - if the request is invalid when "Length" is 0.
+ *           Return "Buffer" if the "Length" is not 0.
+ */	
 uint8_t *Standard_GetInterface(uint16_t Length)
 {
   if (Length == 0)
@@ -95,14 +104,15 @@ uint8_t *Standard_GetInterface(uint16_t Length)
   return (uint8_t *)&pInformation->Current_AlternateSetting;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_SetInterface.
-* Description    : This routine is called to set the interface.
-*                  Then each class should configure the interface them self.
-* Input          : None.
-* Return         : Return USB_SUCCESS: if the request is performed.
-*                  Return USB_UNSUPPORT: if the request is invalid.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_SetInterface.
+ *
+ * @brief   This routine is called to set the interface.
+ *          hen each class should configure the interface them self.
+ *
+ * @return  Return USB_SUCCESS - if the request is performed.
+ *           Return USB_UNSUPPORT - if the request is invalid.
+ */
 RESULT Standard_SetInterface(void)
 {
   RESULT Re;
@@ -127,13 +137,16 @@ RESULT Standard_SetInterface(void)
   return USB_UNSUPPORT;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_GetStatus.
-* Description    : Copy the device request data to "StatusInfo buffer".
-* Input          : Length£ºHow many bytes are needed.
-* Return         : Return 0: if the request is at end of data block,
-*                  or is invalid when "Length" is 0.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_GetStatus.
+ *
+ * @brief   Copy the device request data to "StatusInfo buffer".
+ *
+ * @param   Length - How many bytes are needed.
+ *
+ * @return  Return 0 - if the request is at end of data block,
+ *           or is invalid when "Length" is 0.
+ */
 uint8_t *Standard_GetStatus(uint16_t Length)
 {
   if (Length == 0)
@@ -199,13 +212,14 @@ uint8_t *Standard_GetStatus(uint16_t Length)
   return (uint8_t *)&StatusInfo;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_ClearFeature.
-* Description    : Clear or disable a specific feature.
-* Input          : None.
-* Return         : Return USB_SUCCESS: if the request is performed.
-*                  Return USB_UNSUPPORT: if the request is invalid.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_ClearFeature.
+ *
+ * @brief   Clear or disable a specific feature.
+ *
+ * @return  Return USB_SUCCESS - if the request is performed.
+ *           Return USB_UNSUPPORT - if the request is invalid.
+ */
 RESULT Standard_ClearFeature(void)
 {
   uint32_t     Type_Rec = Type_Recipient;
@@ -280,13 +294,14 @@ RESULT Standard_ClearFeature(void)
   return USB_UNSUPPORT;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_SetEndPointFeature
-* Description    : Set or enable a specific feature of EndPoint
-* Input          : None.
-* Return         : Return USB_SUCCESS: if the request is performed.
-*                  Return USB_UNSUPPORT: if the request is invalid.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_SetEndPointFeature
+ *
+ * @brief   Set or enable a specific feature of EndPoint
+ *
+ * @return  Return USB_SUCCESS - if the request is performed.
+ *           Return USB_UNSUPPORT - if the request is invalid.
+ */
 RESULT Standard_SetEndPointFeature(void)
 {
   uint32_t    wIndex0;
@@ -329,13 +344,14 @@ RESULT Standard_SetEndPointFeature(void)
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_SetDeviceFeature.
-* Description    : Set or enable a specific feature of Device.
-* Input          : None.
-* Return         : Return USB_SUCCESS: if the request is performed.
-*                  Return USB_UNSUPPORT: if the request is invalid.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_SetDeviceFeature.
+ *
+ * @brief   Set or enable a specific feature of Device.
+ *
+ * @return  Return USB_SUCCESS - if the request is performed.
+ *           Return USB_UNSUPPORT - if the request is invalid.
+ */
 RESULT Standard_SetDeviceFeature(void)
 {
   SetBit(pInformation->Current_Feature, 5);
@@ -344,24 +360,26 @@ RESULT Standard_SetDeviceFeature(void)
   return USB_SUCCESS;
 }
 
-/*******************************************************************************
-* Function Name  : Standard_GetDescriptorData.
-* Description    : Standard_GetDescriptorData is used for descriptors transfer.
-*                : This routine is used for the descriptors resident in Flash
-*                  or RAM
-*                  pDesc can be in either Flash or RAM
-*                  The purpose of this routine is to have a versatile way to
-*                  response descriptors request. It allows user to generate
-*                  certain descriptors with software or read descriptors from
-*                  external storage part by part.
-* Input          : Length: Length of the data in this transfer.
-*                  pDesc: A pointer points to descriptor struct.
-*                  The structure gives the initial address of the descriptor and
-*                  its original size.
-* Return         : Address of a part of the descriptor pointed by the Usb_
-*                  wOffset The buffer pointed by this address contains at least
-*                  Length bytes.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Standard_GetDescriptorData.
+ *
+ * @brief   Standard_GetDescriptorData is used for descriptors transfer.
+ *          This routine is used for the descriptors resident in Flash
+ *          or RAM
+ *          pDesc can be in either Flash or RAM
+ *          The purpose of this routine is to have a versatile way to
+ *          response descriptors request. It allows user to generate
+ *          certain descriptors with software or read descriptors from
+ *          external storage part by part.
+ * @param   Length - How many bytes are needed.
+ *          pDesc - A pointer points to descriptor struct.
+ *          The structure gives the initial address of the descriptor and
+ *           its original size.
+ *
+ * @return  Address of a part of the descriptor pointed by the Usb_
+ *          wOffset The buffer pointed by this address contains at least
+ *          Length bytes.
+ */	
 uint8_t *Standard_GetDescriptorData(uint16_t Length, ONE_DESCRIPTOR *pDesc)
 {
   uint32_t  wOffset;
@@ -377,12 +395,13 @@ uint8_t *Standard_GetDescriptorData(uint16_t Length, ONE_DESCRIPTOR *pDesc)
   return pDesc->Descriptor + wOffset;
 }
 
-/*******************************************************************************
-* Function Name  : DataStageOut.
-* Description    : Data stage of a Control Write Transfer.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DataStageOut.
+ *
+ * @brief   Data stage of a Control Write Transfer.
+ *
+ * @return  none
+ */
 void DataStageOut(void)
 {
   ENDPOINT_INFO *pEPinfo = &pInformation->Ctrl_Info;
@@ -433,12 +452,13 @@ void DataStageOut(void)
   }
 }
 
-/*******************************************************************************
-* Function Name  : DataStageIn.
-* Description    : Data stage of a Control Read Transfer.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DataStageIn.
+ *
+ * @brief   Data stage of a Control Read Transfer.
+ *
+ * @return  none
+ */
 void DataStageIn(void)
 {
   ENDPOINT_INFO *pEPinfo = &pInformation->Ctrl_Info;
@@ -490,12 +510,13 @@ Expect_Status_Out:
   pInformation->ControlState = ControlState;
 }
 
-/*******************************************************************************
-* Function Name  : NoData_Setup0.
-* Description    : Proceed the processing of setup request without data stage.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      NoData_Setup0.
+ *
+ * @brief   Proceed the processing of setup request without data stage.
+ *
+ * @return  none
+ */
 void NoData_Setup0(void)
 {
   RESULT Result = USB_UNSUPPORT;
@@ -598,12 +619,13 @@ exit_NoData_Setup0:
   return;
 }
 
-/*******************************************************************************
-* Function Name  : Data_Setup0.
-* Description    : Proceed the processing of setup request with data stage.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Data_Setup0.
+ *
+ * @brief   Proceed the processing of setup request without data stage.
+ *
+ * @return  none
+ */
 void Data_Setup0(void)
 {
   uint8_t *(*CopyRoutine)(uint16_t);
@@ -754,12 +776,13 @@ void Data_Setup0(void)
   return;
 }
 
-/*******************************************************************************
-* Function Name  : Setup0_Process
-* Description    : Get the device request data and dispatch to individual process.
-* Input          : None.
-* Return         : Post0_Process.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Setup0_Process
+ *
+ * @brief   Get the device request data and dispatch to individual process.
+ *
+ * @return  Post0_Process.
+ */
 uint8_t Setup0_Process(void)
 {
   union
@@ -795,13 +818,13 @@ uint8_t Setup0_Process(void)
   return Post0_Process();
 }
 
-/*******************************************************************************
-* Function Name  : In0_Process
-* Description    : Process the IN token on all default endpoint.
-* Input          : None.
-* Output         : None.
-* Return         : Post0_Process.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      In0_Process
+ *
+ * @brief   Process the IN token on all default endpoint.
+ *
+ * @return  Post0_Process.
+ */
 uint8_t In0_Process(void)
 {
   uint32_t ControlState = pInformation->ControlState;
@@ -832,12 +855,13 @@ uint8_t In0_Process(void)
   return Post0_Process();
 }
 
-/*******************************************************************************
-* Function Name  : Out0_Process
-* Description    : Process the OUT token on all default endpoint.
-* Input          : None.
-* Return         : Post0_Process.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Out0_Process
+ *
+ * @brief   Process the OUT token on all default endpoint.
+ *
+ * @return  Post0_Process.
+ */
 uint8_t Out0_Process(void)
 {
   uint32_t ControlState = pInformation->ControlState;
@@ -866,13 +890,14 @@ uint8_t Out0_Process(void)
   return Post0_Process();
 }
 
-/*******************************************************************************
-* Function Name  : Post0_Process
-* Description    : Stall the Endpoint 0 in case of error.
-* Input          : None.
-* Return         : 0: if the control State is in PAUSE
-*                  1: if not.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Post0_Process
+ *
+ * @brief   Stall the Endpoint 0 in case of error.
+ *
+ * @return  0 - if the control State is in PAUSE
+ *          1 - if not.
+ */
 uint8_t Post0_Process(void)
 {  
   SetEPRxCount(ENDP0, Device_Property.MaxPacketSize);
@@ -886,12 +911,15 @@ uint8_t Post0_Process(void)
   return (pInformation->ControlState == PAUSE);
 }
 
-/*******************************************************************************
-* Function Name  : SetDeviceAddress.
-* Description    : Set the device and all the used Endpoints addresses.
-* Input          : Val: device address.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      SetDeviceAddress..
+ *
+ * @brief   Set the device and all the used Endpoints addresses.
+ *
+ * @param   Val: device address.
+ *
+ * @return  none
+ */	
 void SetDeviceAddress(uint8_t Val)
 {
   uint32_t i;
@@ -905,12 +933,13 @@ void SetDeviceAddress(uint8_t Val)
   _SetDADDR(Val | DADDR_EF); 
 }
 
-/*******************************************************************************
-* Function Name  : NOP_Process
-* Description    : No operation function.
-* Input          : None.
-* Return         : None.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      NOP_Process
+ *
+ * @brief   No operation function.
+ *
+ * @return  none
+ */
 void NOP_Process(void)
 {
 }

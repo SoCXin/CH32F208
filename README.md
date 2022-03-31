@@ -1,6 +1,6 @@
 ﻿# [CH32F208](https://github.com/SoCXin/CH32F208)
 
-[![sites](http://182.61.61.133/link/resources/SoC.png)](http://www.SoC.Xin)
+[![sites](http://182.61.61.133/link/resources/SoC.png)](https://docs.soc.xin/CH32F208)
 
 * [WCH](http://www.wch.cn/)：[Cortex-M3](https://github.com/SoCXin/Cortex-M3)
 * [L4R4](https://github.com/SoCXin/Level)：144 MHz
@@ -27,7 +27,6 @@
 * [参考资源](src/)
 * [参考文档](docs/)
 * [参考工程](project/)
-* [入门文档](https://docs.soc.xin/CH32F208)
 
 ### [选型建议](https://github.com/SoCXin)
 
@@ -47,4 +46,4 @@
 [![sites](docs/diff.png)](http://www.wch.cn/products/CH32F208.html)
 [![sites](docs/list.png)](http://www.wch.cn/products/CH32F208.html)
 
-### [探索芯世界 www.SoC.xin](http://www.SoC.Xin)
+### [www.SoC.xin](http://www.SoC.Xin)

@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Main program body.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
 /*
@@ -24,24 +26,25 @@
 /* Global Variable */
 
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
-int main(void)
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
+int main( void )
 {
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-  Delay_Init();
-	USART_Printf_Init(115200);
-	printf("SystemClk:%d\r\n",SystemCoreClock);
+    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_2 );
+    Delay_Init();
+    USART_Printf_Init( 115200 );
+    printf( "SystemClk:%d\r\n", SystemCoreClock );
 
-	printf("This is printf example\r\n");
+    printf( "This is printf example\r\n" );
 
-	while(1)
-  {
+    while( 1 )
+    {
 
-	}
+    }
 }
 

@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : Main program body.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
 /*
@@ -35,26 +37,29 @@
 #define Frame_Format   Standard_Frame
 //#define Frame_Format   Extended_Frame
 
-/*******************************************************************************
-* Function Name  : CAN_Mode_Init
-* Description    : Initializes CAN communication test mode.
-* Input          : tsjw£»CAN synchronisation jump width.
-*									 tbs2£ºCAN time quantum in bit segment 1.
-*						  		 tbs1£ºCAN time quantum in bit segment 2.
-*									 brp£ºSpecifies the length of a time quantum.
-*				  				 mode£ºTest mode.
-*                    CAN_Mode_Normal.
-*										 CAN_Mode_LoopBack.					
-*										 CAN_Mode_Silent.		
-*										 CAN_Mode_Silent_LoopBack.	
-* Return         : None
-*@Note			       Bps	=Fpclk1/((tpb1+1+tbs2+1+1)*brp)
-*******************************************************************************/
+/*********************************************************************
+ * @fn      CAN_Mode_Init
+ *
+ * @brief   Initializes CAN communication test mode.
+ *          Bps =Fpclk1/((tpb1+1+tbs2+1+1)*brp)
+ *
+ * @param   tsjw - CAN synchronisation jump width.
+ *          tbs2 - CAN time quantum in bit segment 1.
+ *          tbs1 - CAN time quantum in bit segment 2.
+ *          brp - Specifies the length of a time quantum.
+ *          mode - Test mode.
+ *            CAN_Mode_Normal.
+ *            CAN_Mode_LoopBack.
+ *            CAN_Mode_Silent.
+ *            CAN_Mode_Silent_LoopBack.
+ *
+ * @return  none
+ */
 void CAN_Mode_Init( u8 tsjw, u8 tbs2, u8 tbs1, u16 brp, u8 mode )
 {
-	GPIO_InitTypeDef GPIO_InitSturcture;
-	CAN_InitTypeDef CAN_InitSturcture;
-	CAN_FilterInitTypeDef CAN_FilterInitSturcture;
+	GPIO_InitTypeDef GPIO_InitSturcture={0};
+	CAN_InitTypeDef CAN_InitSturcture={0};
+	CAN_FilterInitTypeDef CAN_FilterInitSturcture={0};
 	
 	RCC_APB2PeriphClockCmd( RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOB, ENABLE ); 
 	RCC_APB1PeriphClockCmd( RCC_APB1Periph_CAN1, ENABLE );	
@@ -134,20 +139,23 @@ void CAN_Mode_Init( u8 tsjw, u8 tbs2, u8 tbs1, u16 brp, u8 mode )
 	CAN_FilterInit( &CAN_FilterInitSturcture );
 }
 
-/*******************************************************************************
-* Function Name  : CAN_Send_Msg
-* Description    : CAN Transmit function.
-* Input          : msg£ºTransmit data buffer.
-*									 len£ºData length.
-* Return         : 0£ºSend successful.
-*									 1£ºSend failed.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      CAN_Send_Msg
+ *
+ * @brief   CAN Transmit function.
+ *
+ * @param   msg - Transmit data buffer.
+ *          len - Data length.
+ *
+ * @return  0 - Send successful.
+ *          1 - Send failed.
+ */
 u8 CAN_Send_Msg( u8 *msg, u8 len )
 {
 	u8 mbox;
 	u16 i = 0;
 	
-	CanTxMsg CanTxStructure;
+	CanTxMsg CanTxStructure={0};
 
 #if (Frame_Format == Standard_Frame)
 	CanTxStructure.StdId = 0x317;		
@@ -185,18 +193,21 @@ u8 CAN_Send_Msg( u8 *msg, u8 len )
 	}	
 }
 
-/*******************************************************************************
-* Function Name  : CAN_Receive_Msg
-* Description    : CAN Receive function.
-* Input          : buf£ºReceive data buffer.
-* Output         : None
-* Return         : CanRxStructure.DLC£ºReceive data length.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      CAN_Receive_Msg
+ *
+ * @brief   CAN Receive function.
+ *
+ * @param   buf - Receive data buffer.
+ *          len - Data length.
+ *
+ * @return  CanRxStructure.DLC - Receive data length.
+ */
 u8 CAN_Receive_Msg( u8 *buf )
 {
 	u8 i;
 	
-	CanRxMsg CanRxStructure;
+	CanRxMsg CanRxStructure={0};
 	
 	if( CAN_MessagePending( CAN1, CAN_FIFO0 ) == 0)	 
 	{
@@ -213,12 +224,13 @@ u8 CAN_Receive_Msg( u8 *buf )
 	return CanRxStructure.DLC;	
 }
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {
 	u8 i=0;
@@ -244,8 +256,7 @@ int main(void)
 	{	
 		
 #if (CAN_MODE == TX_MODE)		
-		for( i=0; i<8; i++ )
-		{
+		for( i=0; i<8; i++ ){
 			pxbuf[i] = cnt+i;	
 		}
 		
@@ -260,8 +271,7 @@ int main(void)
 			printf( "Send Success\r\n" );
 			printf( "Send Data:\r\n" );
 			
-			for(i=0; i<8; i++)
-			{
+			for(i=0; i<8; i++){
 				printf( "%02x\r\n", pxbuf[i] );
 			}
 		}
@@ -273,8 +283,7 @@ int main(void)
 		{
 			printf( "Receive Data:\r\n" );
 			
-			for(i=0; i<8; i++)
-			{
+			for(i=0; i<8; i++){
 				printf( "%02x\r\n", pxbuf[i] );
 			}
 		}

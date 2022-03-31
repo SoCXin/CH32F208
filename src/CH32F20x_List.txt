@@ -11,13 +11,17 @@ http://wch.cn
   |      |      |--CH32F20xDS0.PDF：CH32F20x数据手册
   |      |-- EVT: CH32F20x评估板和CH32F20x相关例程
   |      |      |-- PUB: 
-  |      |      |      |-- CH32F203评估板说明书.pdf: CH32F203评估板说明及工程创建说明
-  |      |      |      |-- CH32F203SCH.pdf: CH32F203评估板原理图
-  |      |      |      |-- Keil.WCH32F2xx_DFP.1.0.0.pack: 下载器件Pack包
+  |      |      |      |-- CH32F20x评估板说明书.pdf: CH32F20x评估板说明及工程创建说明
+  |      |      |      |-- CH32F20xSCH.pdf: CH32F20x评估板原理图
+  |      |      |      |-- Keil.WCH32F2xx_DFP.1.0.1.pack: 下载器件Pack包
   |      |      |-- EXAM: 
   |      |      |      |-- SRC  
   |      |      |      |      |-- CMSIS：内核系统头文件
-  |      |      |      |      |-- Startup：CH32F20x系列启动文件
+  |      |      |      |      |-- Startup：启动文件。针对用户使用芯片型号包含下列相应的启动文件，同时在ch32f20x.h文件中选择匹配芯片型号定义
+  |      |      |      |      |      |-- startup_ch32f20x_D6.s：适用于CH32F203C6T6-CH32F203C8U6-CH32F203C8T6系列
+  |      |      |      |      |      |-- startup_ch32f20x_D8.s：适用于CH32F203CBT6-CH32F203RCT6-CH32F203VCT6系列
+  |      |      |      |      |      |-- startup_ch32f20x_D8C.s：适用于CH32F207-CH32F205系列
+  |      |      |      |      |      |-- startup_ch32f20x_D8W.s：适用于CH32F208系列  
   |      |      |      |      |-- StdPeriphDriver：基本外设驱动源文件及头文件
   |      |      |      |      |-- Debug：延时函数、串口调试源文件及头文件
   |      |      |      |      |-- USBLIB:USB驱动源文件及头文件
@@ -26,12 +30,12 @@ http://wch.cn
   |      |      |      |      |-- AnalogWatchdog：模拟看门狗例程
   |      |      |      |      |-- Auto_Injection：自动注入模式例程
   |      |      |      |      |-- Discontinuous_mode：间断模式例程
-  |      |      |      |      |-- DualADC_AlternateTrigger：双ADC交替触发采样例程  
-  |      |      |      |      |-- DualADC_Combined_RegInjectionSimul：双ADC混合同步规则+注入采样例程
-  |      |      |      |      |-- DualADC_FastInterleaved：双ADC快速交叉采样例程
-  |      |      |      |      |-- DualADC_InjectionSimul：双ADC同步注入采样例程
-  |      |      |      |      |-- DualADC_RegSimul：双ADC同步规则采样例程
-  |      |      |      |      |-- DualADC_SlowInterleaved：双ADC慢速交叉采样例程  
+  |      |      |      |      |-- DualADC_AlternateTrigger：双ADC交替触发采样例程  ——仅适用于CH32F20x_D6-CH32F20x_D8-CH32F20x_D8C
+  |      |      |      |      |-- DualADC_Combined_RegInjectionSimul：双ADC混合同步规则+注入采样例程 ——仅适用于CH32F20x_D6-CH32F20x_D8-CH32F20x_D8C
+  |      |      |      |      |-- DualADC_FastInterleaved：双ADC快速交叉采样例程 ——仅适用于CH32F20x_D6-CH32F20x_D8-CH32F20x_D8C
+  |      |      |      |      |-- DualADC_InjectionSimul：双ADC同步注入采样例程 ——仅适用于CH32F20x_D6-CH32F20x_D8-CH32F20x_D8C
+  |      |      |      |      |-- DualADC_RegSimul：双ADC同步规则采样例程 ——仅适用于CH32F20x_D6-CH32F20x_D8-CH32F20x_D8C
+  |      |      |      |      |-- DualADC_SlowInterleaved：双ADC慢速交叉采样例程 ——仅适用于CH32F20x_D6-CH32F20x_D8-CH32F20x_D8C  
   |      |      |      |      |-- ExtLines_Trigger：外部触发ADC转换例程
   |      |      |      |      |-- Internal_Temperature：内部温度传感器例程  
   |      |      |      |-- BKP：BKP例程
@@ -40,7 +44,7 @@ http://wch.cn
   |      |      |      |      |-- TestMode：测试模式，包括静默模式、回环模式、回环静默模式
   |      |      |      |      |-- Time-triggered：时间触发通信模式   
   |      |      |      |-- CRC：CRC例程
-  |      |      |      |-- DAC 
+  |      |      |      |-- DAC ——仅适用于CH32F20x_D8-CH32F20x_D8C
   |      |      |      |      |-- DAC_DMA：DAC使用DMA转换例程
   |      |      |      |      |-- DAC_Exit_9_Trig：外部触发DAC转换例程
   |      |      |      |      |-- DAC_Noise_Generation：噪声波形输出例程
@@ -52,8 +56,22 @@ http://wch.cn
   |      |      |      |-- DMA
   |      |      |      |      |-- DMA_MEM2MEM：储存器到储存器模式例程
   |      |      |      |      |-- DMA_MEM2PERIP：储存器到外设模式、外设到储存器模式例程见各外设子例程
+  |      |      |      |-- DVP ——仅适用于CH32F20x_D8C
+  |      |      |      |      |-- DVP_TFTLCD：DVP操作OV2640摄像头视频模式在LCD显示图像例程
+  |      |      |      |      |-- DVP_UART：DVP操作OV2640摄像头JPEG模式例程
+  |      |      |      |-- ETH
+  |      |      |      |      |-- F207 ——仅适用于CH32F20x_D8C   
+  |      |      |      |      |      |-- ETH_internal_10BASE-T_PHY：使用内部集成10M物理层收发以太网帧演示例程
+  |      |      |      |      |      |-- ETH_MII_RMII：使用外部MII/RMII接口物理层收发以太网帧演示例程
+  |      |      |      |      |      |-- ETH_RGMII：使用外部RGMII接口物理层收发以太网帧演示例程 
+  |      |      |      |      |-- F208 ——仅适用于CH32F20x_D8W   
+  |      |      |      |      |      |-- ETH_internal_10BASE-T_PHY：使用内部集成10M物理层收发以太网帧演示例程   
   |      |      |      |-- EXTI：外部中断线例程
   |      |      |      |-- FLASH：FLASH的擦/读/写，以及快速编程 
+  |      |      |      |-- FSMC ——仅适用于CH32F20x_D8-CH32F20x_D8C  
+  |      |      |      |      |-- LCD：FSMC操作TFTLCD例程
+  |      |      |      |      |-- NANDFLASH：FSMC操作NANDFLASH例程
+  |      |      |      |      |-- SRAM：FSMC操作NOR_SRAM例程    
   |      |      |      |-- GPIO：GPIO例程 
   |      |      |      |-- I2C
   |      |      |      |      |-- I2C_7bit_Mode：7位地址模式，Master/Slave 模式收发例程
@@ -61,7 +79,7 @@ http://wch.cn
   |      |      |      |      |-- I2C_DMA：I2C使用DMA，Master/Slave 模式收发例程
   |      |      |      |      |-- I2C_EEPROM：I2C接口操作EEPROM外设例程
   |      |      |      |      |-- I2C_PEC：使用PEC错误校验，Master/Slave 模式收发例程
-  |      |      |      |-- I2S 
+  |      |      |      |-- I2S ——仅适用于CH32F20x_D8-CH32F20x_D8C
   |      |      |      |      |-- HostRx_SlaveTx：I2S主收从发例程
   |      |      |      |      |-- I2S_DMA：I2S主发从收DMA例程
   |      |      |      |      |-- I2S_Interupt：I2S主发从收中断例程     
@@ -73,14 +91,12 @@ http://wch.cn
   |      |      |      |      |-- Stop_Mode：低功耗，停机模式例程
   |      |      |      |      |-- Standby_RAM_LV_Mode：待机模式开启LV时，RAM 2K、30K低功耗数据保持例程
   |      |      |      |      |-- Standby_RAM_Mode：待机模式不开启LV时，RAM 2K、30K低功耗数据保持例程
-  |      |      |      |      |-- Stop_RAM_LV_Mode：停止模式开启LV时，RAM 2K、30K低功耗数据保持例程
-  |      |      |      |      |-- Stop_RAM_Mode：停止模式不开启LV时，RAM 2K、30K低功耗数据保持例程 
   |      |      |      |-- RCC
   |      |      |      |      |-- MCO：MCO引脚时钟输出例程
-  |      |      |      |      |-- HSI_PLL_Source：HSI或HSI/2作为PLL输入时钟例程 
+  |      |      |      |      |-- HSI_PLL_Source：HSI或HSI/2作为PLL输入时钟例程   
   |      |      |      |-- RNG：随机数发生器例程   
-  |      |      |      |-- RTC：日历例程 
-  |      |      |      |-- SDIO：SDIO操作SD卡例程
+  |      |      |      |-- RTC：日历例程  
+  |      |      |      |-- SDIO：SDIO操作SD卡例程 ——仅适用于CH32F20x_D8-CH32F20x_D8C
   |      |      |      |-- SPI
   |      |      |      |      |-- 1Lines_half-duplex：单线半双工模式，Master/Slave 模式数据收发
   |      |      |      |      |-- 2Lines_FullDuplex：双线全双工模式，Master/Slave 模式数据收发
@@ -99,7 +115,7 @@ http://wch.cn
   |      |      |      |      |-- Synchro_ExtTrigger：从模式例程，包括复位模式、门控模式、触发模式
   |      |      |      |      |-- Synchro_Timer：定时器同步模式
   |      |      |      |      |-- TIM_DMA：定时器使用DMA例程
-  |      |      |      |-- TOUCHKEY：TouchKey检测例程 
+  |      |      |      |-- TOUCHKEY：TouchKey检测例程    
   |      |      |      |-- USART
   |      |      |      |      |-- USART_DMA：USART使用DMA，Master/Slave 模式收发例程
   |      |      |      |      |-- USART_HalfDuplex：单线半双工模式，Master/Slave 模式收发例程
@@ -110,5 +126,14 @@ http://wch.cn
   |      |      |      |      |-- USART_Printf：串口打印调试例程
   |      |      |      |      |-- USART_SynchronousMode：同步模式，Master/Slave 模式收发例程
   |      |      |      |-- USB
-  |      |      |      |      |-- USBD：模拟自定义USB设备（CH372设备）例程，提供8个非0通道(上传+下传)，实现数据先下传，然后数据内容取反上传  
+  |      |      |      |      |-- USBD：模拟自定义USB设备（CH372设备）例程，提供8个非0通道(上传+下传)，实现数据先下传，然后数据内容取反上传 ——仅适用于CH32F20x_D6-CH32F20x_D8_CH32F20x_D8W
+  |      |      |      |      |-- USBFS ——仅适用于CH32F20x_D6-CH32F20x_D8C-CH32F20x_D8W
+  |      |      |      |      |      |-- DEVICE
+  |      |      |      |      |      |      |--CH372Device：模拟自定义USB设备（CH372设备）例程 
+  |      |      |      |      |      |      |--HIDKeyboardDevice：模拟Keyboard例程  
+  |      |      |      |      |      |-- HOST：USBFS设备的简易枚举过程例程  
+  |      |      |      |      |-- USBHS ——仅适用于CH32F20x_D8C   
+  |      |      |      |      |      |-- DEVICE
+  |      |      |      |      |      |      |--CH372Device：模拟自定义USB设备（CH372设备）例程 
+  |      |      |      |      |      |      |--HIDKeyboardDevice：模拟Keyboard例程      
   |      |      |      |-- WWDG：窗口看门狗例程

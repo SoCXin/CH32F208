@@ -4,9 +4,11 @@
 * Version            : V1.0.0
 * Date               : 2021/08/08
 * Description        : This file contains the headers of the SDIO.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #ifndef __SDIO_H
-#define __SDIO_H	
+#define __SDIO_H
 
 #include"debug.h"
 
@@ -51,39 +53,39 @@
 typedef enum
 {
     /* special err */
-    SD_CMD_CRC_FAIL                    = (1),
-    SD_DATA_CRC_FAIL                   = (2),
-    SD_CMD_RSP_TIMEOUT                 = (3),
-    SD_DATA_TIMEOUT                    = (4),
-    SD_TX_UNDERRUN                     = (5),
-    SD_RX_OVERRUN                      = (6),
-    SD_START_BIT_ERR                   = (7),
-    SD_CMD_OUT_OF_RANGE                = (8),
-    SD_ADDR_MISALIGNED                 = (9),
-    SD_BLOCK_LEN_ERR                   = (10),
-    SD_ERASE_SEQ_ERR                   = (11),
-    SD_BAD_ERASE_PARAM                 = (12),
-    SD_WRITE_PROT_VIOLATION            = (13),
-    SD_LOCK_UNLOCK_FAILED              = (14),
-    SD_COM_CRC_FAILED                  = (15),
-    SD_ILLEGAL_CMD                     = (16),
-    SD_CARD_ECC_FAILED                 = (17),
-    SD_CC_ERROR                        = (18),
-    SD_GENERAL_UNKNOWN_ERROR           = (19),
-    SD_STREAM_READ_UNDERRUN            = (20),
-    SD_STREAM_WRITE_OVERRUN            = (21),
-    SD_CID_CSD_OVERWRITE               = (22),
-    SD_WP_ERASE_SKIP                   = (23),
-    SD_CARD_ECC_DISABLED               = (24),
-    SD_ERASE_RESET                     = (25),
-    SD_AKE_SEQ_ERROR                   = (26),
-    SD_INVALID_VOLTRANGE               = (27),
-    SD_ADDR_OUT_OF_RANGE               = (28),
-    SD_SWITCH_ERROR                    = (29),
-    SD_SDIO_DISABLED                   = (30),
-    SD_SDIO_FUNCTION_BUSY              = (31),
-    SD_SDIO_FUNCTION_FAILED            = (32),
-    SD_SDIO_UNKNOWN_FUNCTION           = (33),
+    SD_CMD_CRC_FAIL                    = ( 1 ),
+    SD_DATA_CRC_FAIL                   = ( 2 ),
+    SD_CMD_RSP_TIMEOUT                 = ( 3 ),
+    SD_DATA_TIMEOUT                    = ( 4 ),
+    SD_TX_UNDERRUN                     = ( 5 ),
+    SD_RX_OVERRUN                      = ( 6 ),
+    SD_START_BIT_ERR                   = ( 7 ),
+    SD_CMD_OUT_OF_RANGE                = ( 8 ),
+    SD_ADDR_MISALIGNED                 = ( 9 ),
+    SD_BLOCK_LEN_ERR                   = ( 10 ),
+    SD_ERASE_SEQ_ERR                   = ( 11 ),
+    SD_BAD_ERASE_PARAM                 = ( 12 ),
+    SD_WRITE_PROT_VIOLATION            = ( 13 ),
+    SD_LOCK_UNLOCK_FAILED              = ( 14 ),
+    SD_COM_CRC_FAILED                  = ( 15 ),
+    SD_ILLEGAL_CMD                     = ( 16 ),
+    SD_CARD_ECC_FAILED                 = ( 17 ),
+    SD_CC_ERROR                        = ( 18 ),
+    SD_GENERAL_UNKNOWN_ERROR           = ( 19 ),
+    SD_STREAM_READ_UNDERRUN            = ( 20 ),
+    SD_STREAM_WRITE_OVERRUN            = ( 21 ),
+    SD_CID_CSD_OVERWRITE               = ( 22 ),
+    SD_WP_ERASE_SKIP                   = ( 23 ),
+    SD_CARD_ECC_DISABLED               = ( 24 ),
+    SD_ERASE_RESET                     = ( 25 ),
+    SD_AKE_SEQ_ERROR                   = ( 26 ),
+    SD_INVALID_VOLTRANGE               = ( 27 ),
+    SD_ADDR_OUT_OF_RANGE               = ( 28 ),
+    SD_SWITCH_ERROR                    = ( 29 ),
+    SD_SDIO_DISABLED                   = ( 30 ),
+    SD_SDIO_FUNCTION_BUSY              = ( 31 ),
+    SD_SDIO_FUNCTION_FAILED            = ( 32 ),
+    SD_SDIO_UNKNOWN_FUNCTION           = ( 33 ),
     /* Standard err */
     SD_INTERNAL_ERROR,
     SD_NOT_CONFIGURED,
@@ -136,7 +138,7 @@ typedef struct
     u8  ECC;
     u8  CSD_CRC;
     u8  Reserved4;
-} SD_CSD;   
+} SD_CSD;
 
 //SD——CID
 typedef struct
@@ -156,26 +158,26 @@ typedef struct
 /* SD statue */
 typedef enum
 {
-    SD_CARD_READY                  = ((uint32_t)0x00000001),
-    SD_CARD_IDENTIFICATION         = ((uint32_t)0x00000002),
-    SD_CARD_STANDBY                = ((uint32_t)0x00000003),
-    SD_CARD_TRANSFER               = ((uint32_t)0x00000004),
-    SD_CARD_SENDING                = ((uint32_t)0x00000005),
-    SD_CARD_RECEIVING              = ((uint32_t)0x00000006),
-    SD_CARD_PROGRAMMING            = ((uint32_t)0x00000007),
-    SD_CARD_DISCONNECTED           = ((uint32_t)0x00000008),
-    SD_CARD_ERROR                  = ((uint32_t)0x000000FF)
-}SDCardState;
+    SD_CARD_READY                  = ( ( uint32_t )0x00000001 ),
+    SD_CARD_IDENTIFICATION         = ( ( uint32_t )0x00000002 ),
+    SD_CARD_STANDBY                = ( ( uint32_t )0x00000003 ),
+    SD_CARD_TRANSFER               = ( ( uint32_t )0x00000004 ),
+    SD_CARD_SENDING                = ( ( uint32_t )0x00000005 ),
+    SD_CARD_RECEIVING              = ( ( uint32_t )0x00000006 ),
+    SD_CARD_PROGRAMMING            = ( ( uint32_t )0x00000007 ),
+    SD_CARD_DISCONNECTED           = ( ( uint32_t )0x00000008 ),
+    SD_CARD_ERROR                  = ( ( uint32_t )0x000000FF )
+} SDCardState;
 
 /* SD informatiion */
 typedef struct
 {
-  SD_CSD SD_csd;
-  SD_CID SD_cid;
-  long long CardCapacity;
-  u32 CardBlockSize;
-  u16 RCA;
-  u8 CardType;
+    SD_CSD SD_csd;
+    SD_CID SD_cid;
+    long long CardCapacity;
+    u32 CardBlockSize;
+    u16 RCA;
+    u8 CardType;
 } SD_CardInfo;
 extern SD_CardInfo SDCardInfo;
 
@@ -200,8 +202,8 @@ extern SD_CardInfo SDCardInfo;
 #define SD_CMD_READ_SINGLE_BLOCK                   ((u8)17)
 #define SD_CMD_READ_MULT_BLOCK                     ((u8)18)
 #define SD_CMD_HS_BUSTEST_WRITE                    ((u8)19)
-#define SD_CMD_WRITE_DAT_UNTIL_STOP                ((u8)20) 
-#define SD_CMD_SET_BLOCK_COUNT                     ((u8)23) 
+#define SD_CMD_WRITE_DAT_UNTIL_STOP                ((u8)20)
+#define SD_CMD_SET_BLOCK_COUNT                     ((u8)23)
 #define SD_CMD_WRITE_SINGLE_BLOCK                  ((u8)24)
 #define SD_CMD_WRITE_MULT_BLOCK                    ((u8)25)
 #define SD_CMD_PROG_CID                            ((u8)26)
@@ -323,27 +325,27 @@ extern SD_CardInfo SDCardInfo;
 //CMD8
 #define SDIO_SEND_IF_COND               ((u32)0x00000008)
 
-SD_Error SD_Init(void);
-void SDIO_Clock_Set(u8 clkdiv);
-void SDIO_Send_Cmd(u8 cmdindex,u8 waitrsp,u32 arg);
-void SDIO_Send_Data_Cfg(u32 datatimeout,u32 datalen,u8 blksize,u8 dir);
-SD_Error SD_PowerON(void);    
-SD_Error SD_PowerOFF(void);
-SD_Error SD_InitializeCards(void);
-SD_Error SD_GetCardInfo(SD_CardInfo *cardinfo);
-SD_Error SD_EnableWideBusOperation(u32 wmode);
-SD_Error SD_SetDeviceMode(u32 mode);
-SD_Error SD_SelectDeselect(u32 addr); 
-SD_Error SD_SendStatus(uint32_t *pcardstatus);
-SDCardState SD_GetState(void);
-SD_Error SD_ReadBlock(u8 *buf,long long addr,u16 blksize);  
-SD_Error SD_ReadMultiBlocks(u8 *buf,long long  addr,u16 blksize,u32 nblks);  
-SD_Error SD_WriteBlock(u8 *buf,long long addr,  u16 blksize);
-SD_Error SD_WriteMultiBlocks(u8 *buf,long long addr,u16 blksize,u32 nblks);
-SD_Error SD_ProcessIRQSrc(void);
-void SD_DMA_Config(u32*mbuf,u32 bufsize,u32 dir); 
-u8 SD_ReadDisk(u8*buf,u32 sector,u8 cnt);
-u8 SD_WriteDisk(u8*buf,u32 sector,u8 cnt);
+SD_Error SD_Init( void );
+void SDIO_Clock_Set( u8 clkdiv );
+void SDIO_Send_Cmd( u8 cmdindex, u8 waitrsp, u32 arg );
+void SDIO_Send_Data_Cfg( u32 datatimeout, u32 datalen, u8 blksize, u8 dir );
+SD_Error SD_PowerON( void );
+SD_Error SD_PowerOFF( void );
+SD_Error SD_InitializeCards( void );
+SD_Error SD_GetCardInfo( SD_CardInfo *cardinfo );
+SD_Error SD_EnableWideBusOperation( u32 wmode );
+SD_Error SD_SetDeviceMode( u32 mode );
+SD_Error SD_SelectDeselect( u32 addr );
+SD_Error SD_SendStatus( uint32_t *pcardstatus );
+SDCardState SD_GetState( void );
+SD_Error SD_ReadBlock( u8 *buf, long long addr, u16 blksize );
+SD_Error SD_ReadMultiBlocks( u8 *buf, long long  addr, u16 blksize, u32 nblks );
+SD_Error SD_WriteBlock( u8 *buf, long long addr,  u16 blksize );
+SD_Error SD_WriteMultiBlocks( u8 *buf, long long addr, u16 blksize, u32 nblks );
+SD_Error SD_ProcessIRQSrc( void );
+void SD_DMA_Config( u32 *mbuf, u32 bufsize, u32 dir );
+u8 SD_ReadDisk( u8 *buf, u32 sector, u8 cnt );
+u8 SD_WriteDisk( u8 *buf, u32 sector, u8 cnt );
 
 #endif
 
