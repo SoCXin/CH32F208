@@ -70,9 +70,7 @@
         "speed": 115200
     },
     "keywords": [
-        "dev-platform",
-        "ARM",
-        "Cortex-M",
+        "Cortex-M3",
         "WCH",
         "DAC","SDIO","CAN","I2C","RTC","SPI",
         "3.6V","1.8V"
