@@ -6,13 +6,13 @@
 * Description        : Main program body.
 *********************************************************************************
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-* Attention: This software (modified or not) and binary are used for 
+* Attention: This software (modified or not) and binary are used for
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
 *******************************************************************************/
 /*
  *@Note
 IPRaw_PING example, demonstrate the PING feature.
-For details on the selection of engineering chips, 
+For details on the selection of engineering chips,
 please refer to the "CH32F20x Evaluation Board Manual" under the CH32F20xEVT\EVT\PUB folder.
 */
 #include "string.h"
@@ -184,11 +184,11 @@ int main(void)
     printf("SystemClk:%d\r\n",SystemCoreClock);
     printf("net version:%x\n",WCHNET_GetVer());
     if( WCHNET_LIB_VER != WCHNET_GetVer() ){
-      printf("version error.\n");
+        printf("version error.\n");
     }
     WCHNET_GetMacAddr(MACAddr);                                             //get the chip MAC address
     printf("mac addr:");
-    for(i = 0; i < 6; i++) 
+    for(i = 0; i < 6; i++)
         printf("%x ",MACAddr[i]);
     printf("\n");
     TIM2_Init();

@@ -6,7 +6,7 @@
 * Description        : Main program body.
 *********************************************************************************
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-* Attention: This software (modified or not) and binary are used for 
+* Attention: This software (modified or not) and binary are used for
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
 *******************************************************************************/
 /*
@@ -15,7 +15,7 @@ MQTT example, this program is used to demonstrate TCP/IP-based MQTT protocol com
 After the single-chip microcomputer connects to Ethernet and MQTT server, a topic will be released.
 Subscribe to this topic and publish messages to this topic.
 
-For details on the selection of engineering chips, 
+For details on the selection of engineering chips,
 please refer to the "CH32F20x Evaluation Board Manual" under the CH32F20xEVT\EVT\PUB folder.
 */
 #include "string.h"
@@ -25,10 +25,10 @@ please refer to the "CH32F20x Evaluation Board Manual" under the CH32F20xEVT\EVT
 #include "MQTTPacket.h"
 
 uint8_t MACAddr[6];                                     //MAC address
-uint8_t IPAddr[4]   = {192,168,1,10};                   //IP address
+uint8_t IPAddr[4]   = {192,168,1,3};                   //IP address
 uint8_t GWIPAddr[4] = {192,168,1,1};                    //Gateway IP address
 uint8_t IPMask[4]   = {255,255,255,0};                  //subnet mask
-uint8_t DESIP[4]    = {0};                              //MQTT server IP address,!!need to be modified manually
+uint8_t DESIP[4]    = {124,221,183,170};                              //MQTT server IP address,!!need to be modified manually
 
 uint8_t SocketId;                                       //socket id
 uint8_t SocketRecvBuf[RECE_BUF_LEN];                    //socket receive buffer
@@ -36,8 +36,8 @@ uint8_t MyBuf[RECE_BUF_LEN];
 uint16_t desport = 1883;                                //MQTT server port
 uint16_t srcport = 4200;                                //source port
 
-char *username  = "user1";                         			//Device name, unique for each device, available "/" for classification
-char *password  = "user1";                         			//Server login password
+char *username  = "ch32";                         			//Device name, unique for each device, available "/" for classification
+char *password  = "123456";                         			//Server login password
 char *sub_topic = "topic/1";                       			//subscribed session name
 char *pub_topic = "topic/1";                       			//Published session name
 int pub_qos = 0;                                   			//Publish quality of service
@@ -422,7 +422,7 @@ int main(void)
     }
     WCHNET_GetMacAddr(MACAddr);                                              //get the chip MAC address
     printf("mac addr:");
-    for(i = 0; i < 6; i++) 
+    for(i = 0; i < 6; i++)
         printf("%x ",MACAddr[i]);
     printf("\n");
     TIM2_Init();

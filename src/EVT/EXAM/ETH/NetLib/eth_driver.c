@@ -6,7 +6,7 @@
 * Description        : eth program body.
 *********************************************************************************
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-* Attention: This software (modified or not) and binary are used for 
+* Attention: This software (modified or not) and binary are used for
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
 *******************************************************************************/
 #include "eth_driver.h"
@@ -44,8 +44,8 @@ uint16_t gPHYAddress;
 uint32_t volatile LocalTime;
 ETH_DMADESCTypeDef *pDMARxSet;
 ETH_DMADESCTypeDef *pDMATxSet;
-																		 
-#if defined(CH32F20x_D8W)									 
+
+#if defined(CH32F20x_D8W)
 ETH_DMADESCTypeDef *DMATxDescToSet;
 ETH_DMADESCTypeDef *DMARxDescToGet;
 uint32_t phyLinkTime;
@@ -55,10 +55,10 @@ uint8_t phyPN=0x01;
 uint8_t phyPNChangeCnt = 0;
 uint8_t phyLinkCnt = 0;
 uint8_t phyRetryCnt = 0;
-uint8_t phySucCnt = 0;						 
-#endif										 
+uint8_t phySucCnt = 0;
+#endif
 
-#if( defined(CH32F20x_D8C) && (PHY_MODE ==  USE_10M_BASE) )	
+#if( defined(CH32F20x_D8C) && (PHY_MODE ==  USE_10M_BASE) )
 uint32_t phyLinkTime;
 uint8_t  phyLinkStatus = 0;
 uint8_t  phyStatus = 0;
@@ -68,7 +68,7 @@ uint8_t  phySucCnt = 0;
 uint8_t  phyPN = PHY_PN_SWITCH_AUTO;
 #endif
 
-#if( defined(CH32F20x_D8C) && (PHY_MODE ==  USE_MAC_MII) )								 
+#if( defined(CH32F20x_D8C) && (PHY_MODE ==  USE_MAC_MII) )
 u16 LastPhyStat = 0;
 u32 LastQueryPhyTime = 0;
 #endif
@@ -104,7 +104,7 @@ void WCHNET_TimeIsr( uint16_t timperiod )
     LocalTime += timperiod;
 }
 
-#if defined(CH32F20x_D8C)	
+#if defined(CH32F20x_D8C)
 /*********************************************************************
  * @fn      WCHNET_QueryPhySta
  *
@@ -321,7 +321,7 @@ void ETH_LedConfiguration(void)
 void ETH_SetClock(void)
 {
     RCC_PLL3Cmd(DISABLE);
-    RCC_PREDIV2Config(RCC_PREDIV2_Div2);                // HSE = 8M
+    RCC_PREDIV2Config(RCC_PREDIV2_Div4);                // HSE = 8M
     RCC_PLL3Config(RCC_PLL3Mul_15);                     // 4M*15 = 60MHz
     RCC_PLL3Cmd(ENABLE);
     while(RESET == RCC_GetFlagStatus(RCC_FLAG_PLL3RDY));
@@ -776,7 +776,7 @@ uint8_t ETH_LibInit( uint8_t *ip, uint8_t *gwip, uint8_t *mask, uint8_t *macaddr
     return (s);
 }
 
-#elif defined(CH32F20x_D8W)	
+#elif defined(CH32F20x_D8W)
 
 /*********************************************************************
  * @fn      WritePHYReg

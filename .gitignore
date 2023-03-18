@@ -3,5 +3,10 @@
 *.log
 .pio/
 .vscode/
-*.uvguix.OWNER
+*.uvguix.*
 *.zip
+obj/
+list/
+*.dbgconf
+*.scvd
+*.uvoptx
