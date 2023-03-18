@@ -3,11 +3,11 @@
 ;* Author             : WCH
 ;* Version            : V1.0.0
 ;* Date               : 2021/08/08
-;* Description        : CH32F203K8-CH32F203C6-CH32F203C8
+;* Description        : CH32F203K8-CH32F203C6-CH32F208WB
 ;*                    vector table for MDK-ARM toolchain.
 ;*********************************************************************************
 ;* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-;* Attention: This software (modified or not) and binary are used for 
+;* Attention: This software (modified or not) and binary are used for
 ;* microcontroller manufactured by Nanjing Qinheng Microelectronics.
 ;*******************************************************************************/
 
@@ -63,7 +63,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     0                          ; Reserved
                 DCD     PendSV_Handler             ; PendSV Handler
                 DCD     SysTick_Handler            ; SysTick Handler
-									
+
 ;/*******************************************************************************
 ; External Interrupts
 ;*******************************************************************************/
@@ -113,8 +113,8 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     USBHD_IRQHandler           ; USBHD
                 DCD     USBHDWakeUp_IRQHandler     ; USBHD WakeUp
                 DCD     UART4_IRQHandler           ; UART4
-                DCD     DMA1_Channel8_IRQHandler   ; DMA1 Channel8 				
-				
+                DCD     DMA1_Channel8_IRQHandler   ; DMA1 Channel8
+
 __Vectors_End
 
 __Vectors_Size  EQU  __Vectors_End - __Vectors
@@ -126,7 +126,7 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
      IMPORT  __main
-     IMPORT  SystemInit			 
+     IMPORT  SystemInit
                  LDR     R0, =SystemInit
                  BLX     R0
                  LDR     R0, =__main
@@ -226,7 +226,7 @@ Default_Handler PROC
                 EXPORT  USBHD_IRQHandler           [WEAK]
                 EXPORT  USBHDWakeUp_IRQHandler     [WEAK]
                 EXPORT  UART4_IRQHandler           [WEAK]
-                EXPORT  DMA1_Channel8_IRQHandler   [WEAK] 
+                EXPORT  DMA1_Channel8_IRQHandler   [WEAK]
 
 WWDG_IRQHandler
 PVD_IRQHandler
@@ -270,11 +270,11 @@ USART2_IRQHandler
 USART3_IRQHandler
 EXTI15_10_IRQHandler
 RTCAlarm_IRQHandler
-USBWakeUp_IRQHandler 
-USBHD_IRQHandler 
-USBHDWakeUp_IRQHandler 
-UART4_IRQHandler 
-DMA1_Channel8_IRQHandler 
+USBWakeUp_IRQHandler
+USBHD_IRQHandler
+USBHDWakeUp_IRQHandler
+UART4_IRQHandler
+DMA1_Channel8_IRQHandler
 
                 B       .
 
@@ -285,17 +285,17 @@ DMA1_Channel8_IRQHandler
 ;/*******************************************************************************
 ; User Stack and Heap initialization
 ;*******************************************************************************/
-                 IF      :DEF:__MICROLIB           
-                
+                 IF      :DEF:__MICROLIB
+
                  EXPORT  __initial_sp
                  EXPORT  __heap_base
                  EXPORT  __heap_limit
-                
+
                  ELSE
-                
+
                  IMPORT  __use_two_region_memory
                  EXPORT  __user_initial_stackheap
-                 
+
 __user_initial_stackheap
 
                  LDR     R0, =  Heap_Mem

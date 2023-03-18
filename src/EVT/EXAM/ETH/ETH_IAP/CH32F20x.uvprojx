@@ -7,23 +7,23 @@
 
   <Targets>
     <Target>
-      <TargetName>CH32F20x</TargetName>
+      <TargetName>CH32F208</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>CH32F203C8</Device>
+          <Device>CH32F208WB</Device>
           <Vendor>WCH</Vendor>
           <PackID>Keil.WCH32F2xx_DFP.1.0.1</PackID>
           <PackURL>http://www.wch.cn/</PackURL>
           <Cpu>IROM(0x08000000,0x10000) IRAM(0x20000000,0x5000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0CH32F2xx -FS08000000 -FL078000 -FP0($$Device:CH32F203C8$Flash/CH32F2xx.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0CH32F2xx -FS08000000 -FL078000 -FP0($$Device:CH32F208WB$Flash/CH32F2xx.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:CH32F203C8$Device/Include/ch32f20x.h</RegisterFile>
+          <RegisterFile>$$Device:CH32F208WB$Device/Include/ch32f20x.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:CH32F203C8$SVD/CH32F203xx.svd</SFDFile>
+          <SFDFile>$$Device:CH32F208WB$SVD/CH32F203xx.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>

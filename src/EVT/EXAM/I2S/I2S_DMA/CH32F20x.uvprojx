@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>CH32F20x</TargetName>
+      <TargetName>CH32F208</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>

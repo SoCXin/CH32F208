@@ -6,7 +6,7 @@
 * Description        : Main program body.
 *********************************************************************************
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
-* Attention: This software (modified or not) and binary are used for 
+* Attention: This software (modified or not) and binary are used for
 * microcontroller manufactured by Nanjing Qinheng Microelectronics.
 *******************************************************************************/
 #include "debug.h"
@@ -35,13 +35,13 @@ TaskHandle_t Task2Task_Handler;
  */
 void GPIO_Toggle_INIT(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStructure={0};
+    GPIO_InitTypeDef  GPIO_InitStructure={0};
 
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-  GPIO_Init(GPIOA, &GPIO_InitStructure);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
 
@@ -56,8 +56,8 @@ void GPIO_Toggle_INIT(void)
  */
 void task1_task(void *pvParameters)
 {
-		UBaseType_t msticks=0;
-		msticks = pdMS_TO_TICKS(500);
+    UBaseType_t msticks=0;
+    msticks = pdMS_TO_TICKS(600);
     while(1)
     {
         printf("task1 entry\r\n");
@@ -78,16 +78,16 @@ void task1_task(void *pvParameters)
  * @return  none
  */
 void task2_task(void *pvParameters)
-{		
-		UBaseType_t msticks=0;
-		msticks = pdMS_TO_TICKS(1000);
+{
+    UBaseType_t msticks=0;
+    msticks = pdMS_TO_TICKS(1000);
     while(1)
     {
-        printf("task2 entry\r\n");
         GPIO_ResetBits(GPIOA, GPIO_Pin_1);
         vTaskDelay(msticks);
         GPIO_SetBits(GPIOA, GPIO_Pin_1);
         vTaskDelay(msticks);
+        printf("task2 entry\r\n");
     }
 }
 

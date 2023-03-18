@@ -10,3 +10,8 @@ list/
 *.dbgconf
 *.scvd
 *.uvoptx
+**/FSMC/
+**/SDIO/
+**/DVP/
+**/RNG/
+**/USBHS/
